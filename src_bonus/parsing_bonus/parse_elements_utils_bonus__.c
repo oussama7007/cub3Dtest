@@ -6,7 +6,7 @@
 /*   By: bkolani <bkolani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:01:11 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/05 17:04:35 by bkolani          ###   ########.fr       */
+/*   Updated: 2025/09/05 18:10:46 by bkolani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,12 @@
 int	parse_color_helper(char **rgb, int *rgb_int, t_gc *gc, size_t len)
 {
 	if (len < 3 || len > 3)
-	{
-		free_split_alloc(rgb);
 		return (print_err("Map error: Only 3 integers needed for a color!\n"));
-	}
 	if (!is_color_integer(rgb[0], &rgb_int[0], gc)
 		|| !is_color_integer(rgb[1], &rgb_int[1], gc)
 		|| !is_color_integer(rgb[2], &rgb_int[2], gc))
-	{
-		free_split_alloc(rgb);
 		return (print_err("Map error: Only "
 				"digits are needed for each color!\n"));
-	}
 	return (0);
 }
 
