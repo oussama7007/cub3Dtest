@@ -6,7 +6,7 @@
 /*   By: bkolani <bkolani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:01:11 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/05 18:10:46 by bkolani          ###   ########.fr       */
+/*   Updated: 2025/09/05 18:16:17 by bkolani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,30 +31,49 @@ int	is_color_line(const char *line)
 	return (1);
 }
 
+// int	is_color_integer(char *color, int *rgb_int, t_gc *gc)
+// {
+// 	size_t	i;
+// 	char	*str_without_new_line;
+
+// 	i = 0;
+// 	str_without_new_line = NULL;
+// 	while (i < ft_strlen(color))
+// 	{
+// 		if (!(color[i] >= '0' && color[i] <= '9')
+// 			&& color[i] != '\n' && color[i] != '-'
+// 			&& color[i] != '+')
+// 			return (0);
+// 		if (color[i] == '\n')
+// 		{
+// 			str_without_new_line = ft_substr(color, 0, i, gc);
+// 			break ;
+// 		}
+// 		i++;
+// 	}
+// 	if (str_without_new_line != NULL)
+// 		*rgb_int = ft_atoi(str_without_new_line);
+// 	else
+// 		*rgb_int = ft_atoi(color);
+// 	return (1);
+// }
+
 int	is_color_integer(char *color, int *rgb_int, t_gc *gc)
 {
 	size_t	i;
 	char	*str_without_new_line;
 
 	i = 0;
+	(void)gc;
 	str_without_new_line = NULL;
 	while (i < ft_strlen(color))
 	{
 		if (!(color[i] >= '0' && color[i] <= '9')
-			&& color[i] != '\n' && color[i] != '-'
-			&& color[i] != '+')
+			&& !ft_isspace(color[i]) && color[i] != '-' && color[i] != '+')
 			return (0);
-		if (color[i] == '\n')
-		{
-			str_without_new_line = ft_substr(color, 0, i, gc);
-			break ;
-		}
 		i++;
 	}
-	if (str_without_new_line != NULL)
-		*rgb_int = ft_atoi(str_without_new_line);
-	else
-		*rgb_int = ft_atoi(color);
+	*rgb_int = ft_atoi(color);
 	return (1);
 }
 

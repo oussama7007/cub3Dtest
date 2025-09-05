@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_elements_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkolani <bkolani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:19:40 by oait-si-          #+#    #+#             */
-/*   Updated: 2025/09/04 17:25:53 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/05 18:15:52 by bkolani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,12 @@
 
 int	parse_color_helper(char **rgb, int *rgb_int, t_gc *gc, size_t len)
 {
-	int	i;
-
 	if (len < 3 || len > 3)
 		return (print_err("Map error: Only 3 integers needed for a color!\n"));
 	if (!is_color_integer(rgb[0], &rgb_int[0], gc)
 		|| !is_color_integer(rgb[1], &rgb_int[1], gc)
 		|| !is_color_integer(rgb[2], &rgb_int[2], gc))
-	{
-		i = -1;
-		while (++i < 3)
-			printf("the color [%d]; %d\n", i, rgb_int[i]);
 		return (print_err("Error: Only digits are needed for each color!\n"));
-	}
 	return (0);
 }
 
