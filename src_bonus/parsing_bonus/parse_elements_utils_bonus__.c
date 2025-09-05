@@ -1,0 +1,104 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_elements_utils_bonus__.c                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bkolani <bkolani@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/05 17:01:11 by bkolani           #+#    #+#             */
+/*   Updated: 2025/09/05 17:04:35 by bkolani          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/cub3d_bonus.h"
+
+int	parse_color_helper(char **rgb, int *rgb_int, t_gc *gc, size_t len)
+{
+	if (len < 3 || len > 3)
+	{
+		free_split_alloc(rgb);
+		return (print_err("Map error: Only 3 integers needed for a color!\n"));
+	}
+	if (!is_color_integer(rgb[0], &rgb_int[0], gc)
+		|| !is_color_integer(rgb[1], &rgb_int[1], gc)
+		|| !is_color_integer(rgb[2], &rgb_int[2], gc))
+	{
+		free_split_alloc(rgb);
+		return (print_err("Map error: Only "
+				"digits are needed for each color!\n"));
+	}
+	return (0);
+}
+
+int	is_color_line(const char *line)
+{
+	if (ft_strncmp(line, "F ", 2) && ft_strncmp(line, "C ", 2))
+		return (0);
+	return (1);
+}
+
+int	is_color_integer(char *color, int *rgb_int, t_gc *gc)
+{
+	size_t	i;
+	char	*str_without_new_line;
+
+	i = 0;
+	str_without_new_line = NULL;
+	while (i < ft_strlen(color))
+	{
+		if (!(color[i] >= '0' && color[i] <= '9')
+			&& color[i] != '\n' && color[i] != '-'
+			&& color[i] != '+')
+			return (0);
+		if (color[i] == '\n')
+		{
+			str_without_new_line = ft_substr(color, 0, i, gc);
+			break ;
+		}
+		i++;
+	}
+	if (str_without_new_line != NULL)
+		*rgb_int = ft_atoi(str_without_new_line);
+	else
+		*rgb_int = ft_atoi(color);
+	return (1);
+}
+
+int	fill_sprites_and_doors_arrays(t_config *config)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (config->map.grid[++i])
+	{
+		j = -1;
+		while (config->map.grid[i][++j])
+		{
+			if (config->map.grid[i][j] == '3')
+			{
+				if (add_sprite(config, j, i, ITEM_TYPE))
+					return (-1);
+			}
+			else if (config->map.grid[i][j] == '4')
+			{
+				if (add_door(config, j, i))
+					return (-1);
+			}
+		}
+	}
+	return (0);
+}
+
+int	validate_config(t_config *config, t_gc *gc)
+{
+	(void)gc;
+	if (!config->no || !config->so || !config->ea || !config->we)
+		return (print_err("Map error: element path missing\n"));
+	if (my_access(config->no) || my_access(config->so)
+		|| my_access(config->ea) || my_access(config->we))
+	{
+		return (print_err("Map error: Invalid path; file not found!\n"));
+	}
+	return (0);
+}
