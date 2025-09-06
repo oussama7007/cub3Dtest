@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkolani <bkolani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:20:36 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/05 17:58:35 by bkolani          ###   ########.fr       */
+/*   Updated: 2025/09/06 15:58:51 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,6 +294,7 @@ void	ft_bzero(void *s, size_t len);
 void	*ft_memset(void *b, int c, size_t len);
 
 // PARSING UTILS FUNCTIONS
+int		is_door_valide(char **grid, int x, int y);
 int		parse_color_helper(char **rgb, int *rgb_int, t_gc *gc, size_t len);
 void	free_split_alloc(char **arr);
 int		is_color_line(const char *line);

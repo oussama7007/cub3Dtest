@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_elements_utils_bonus_.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkolani <bkolani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 16:55:51 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/05 16:58:04 by bkolani          ###   ########.fr       */
+/*   Updated: 2025/09/06 14:39:20 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,7 @@ int	parse_color(const char *line, t_config *config,
 int	handle_config_line_err(t_config *config, char *line,
 	int map_started, t_gc *gc)
 {
-	if (map_started)
-		return (print_err("Map error: Configuration lines before "
-				"the map description!\n"));
+	(void)map_started;
 	if (handle_config_line(config, gc, line))
 		return (-1);
 	return (0);

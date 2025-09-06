@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkolani <bkolani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 15:24:44 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/05 16:57:56 by bkolani          ###   ########.fr       */
+/*   Updated: 2025/09/06 14:59:22 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int	is_map_desc_line(const char *line)
 		if (line[i] != '1' && line[i] != '0'
 			&& !ft_isspace(line[i]) && line[i] != 'N'
 			&& line[i] != 'S' && line[i] != 'E'
-			&& line[i] != 'W' && !(line[i] >= '2' && line[i] <= '9')
-			&& line[i] != 'D')
+			&& line[i] != 'W' && !(line[i] == '3')
+			&& line[i] != '4')
 			return (0);
 	}
 	if (is_empty_line(line))

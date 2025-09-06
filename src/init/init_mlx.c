@@ -6,11 +6,11 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 13:44:08 by oait-si-          #+#    #+#             */
-/*   Updated: 2025/09/05 13:44:41 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/06 15:09:04 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d_bonus.h"
+#include "../../includes/cub3d.h"
 
 int	ft_init_mlx(t_mlx *mlx)
 {

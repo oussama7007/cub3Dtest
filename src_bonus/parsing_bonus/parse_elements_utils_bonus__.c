@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_elements_utils_bonus__.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkolani <bkolani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:01:11 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/05 18:16:17 by bkolani          ###   ########.fr       */
+/*   Updated: 2025/09/06 14:27:30 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	is_color_integer(char *color, int *rgb_int, t_gc *gc)
 	while (i < ft_strlen(color))
 	{
 		if (!(color[i] >= '0' && color[i] <= '9')
-			&& !ft_isspace(color[i]) && color[i] != '-' && color[i] != '+')
+			&& !ft_isspace(color[i]))
 			return (0);
 		i++;
 	}

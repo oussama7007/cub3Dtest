@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkolani <bkolani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 14:26:15 by oait-si-          #+#    #+#             */
-/*   Updated: 2025/09/05 17:03:19 by bkolani          ###   ########.fr       */
+/*   Updated: 2025/09/06 15:08:37 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,26 +60,6 @@ static char	**read_map_file_lines(const char *filename, t_gc *gc)
 	return (lines);
 }
 
-// static char **read_map_file_lines(const char *filename, t_gc *gc)
-// {
-//     int fd;
-//     char    **lines;
-//     char    *line;
-//     int     i;
-
-//     fd = open(filename, O_RDONLY, 0644);
-//     if (fd == -1)
-//         return (NULL);
-//     lines = gc_malloc(gc, sizeof(char *) * 2048);
-//     line = NULL;
-//     i = -1;
-//     while ((line = get_next_line(fd, gc)) && i < 2047)
-//         lines[++i] = ft_strdup(line, gc);
-//     lines[++i] = NULL;
-//     close(fd);
-//     return (lines);
-// }
-
 int	add_sprite(t_config *config, double x, double y, int type)
 {
 	t_sprite	*new_arr;
@@ -108,6 +88,8 @@ int	add_door(t_config *config, int x, int y)
 	t_door	*new_arr;
 	int		i;
 
+	if (is_door_valide(config->map.grid, x, y))
+		return (print_err("Error: door is not surrounded by walls\n"));
 	new_arr = malloc(sizeof(t_door) * (config->doors_count + 1));
 	if (!new_arr)
 		return (print_err("new_arr allocation failed\n"));
@@ -149,8 +131,8 @@ int	parse_cub3d_map(t_config *config, t_gc *gc, const char *filename)
 		|| validate_config(config, gc)
 		|| validate_map(config, gc, map_desc_len))
 		return (-1);
-	config->map.grid
-	[(int)config->player.pos.y][(int)config->player.pos.x] = '0';
+	config->map.grid[(int)config->player.pos.y]
+	[(int)config->player.pos.x] = '0';
 	if (fill_sprites_and_doors_arrays(config))
 		return (-1);
 	return (0);

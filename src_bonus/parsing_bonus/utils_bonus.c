@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkolani <bkolani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:03:39 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/05 17:07:40 by bkolani          ###   ########.fr       */
+/*   Updated: 2025/09/06 15:08:29 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,12 @@ int	find_player_position(t_config *config, char **tmp_map)
 			set_player_details(config, tmp_map, i);
 	}
 	return (0);
+}
+
+int	is_door_valide(char **grid, int x, int y)
+{
+	if (((grid[y][x - 1] == '1' && grid[y][x + 1] == '1')
+		|| (grid[y + 1][x] == '1' && grid[y - 1][x] == '1')))
+		return (0);
+	return (1);
 }
