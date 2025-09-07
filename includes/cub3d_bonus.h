@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:20:36 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/06 15:58:51 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/07 16:24:58 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -353,7 +353,7 @@ void	open_door(t_game *game);
 int		draw_background(t_game *game);
 int		put_pixel(t_img *img, int x, int y, int color);
 int		get_texture_pixels(t_img *tex, int x, int y);
-int		draw_mini_map(t_game *game);
+int		draw_mini_map(t_game *game, t_img screen);
 void	calculate_dist_camera_to_sprite(t_config *config);
 void	sort_sprites_by_distance(t_sprite *sprites, int count);
 void	update_sprites_animation(t_game *game);

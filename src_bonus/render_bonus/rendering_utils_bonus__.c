@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering_utils_bonus__.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkolani <bkolani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 15:21:51 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/05 15:21:54 by bkolani          ###   ########.fr       */
+/*   Updated: 2025/09/07 16:56:32 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	draw_opened_door(t_game *game, t_door *door, int color)
 	}
 	return (0);
 }
+
+
 
 int	draw_closed_door(t_game *game, t_door *door, int color)
 {
@@ -74,30 +76,30 @@ int	draw_map_door_cell(t_game *game, int map_x, int map_y, int color)
 	return (0);
 }
 
-int	draw_player_on_the_map(t_game *game, int color)
-{
-	int	px;
-	int	py;
-	int	y;
-	int	x;
+// int	draw_player_on_the_map(t_game *game, int color)
+// {
+// 	int	px;
+// 	int	py;
+// 	int	y;
+// 	int	x;
 
-	px = game->config.player.pos.x * CELL_SIZE;
-	py = game->config.player.pos.y * CELL_SIZE;
-	y = -PLAYER_CELL_SIZE / 2;
-	while (y < PLAYER_CELL_SIZE / 2)
-	{
-		x = -PLAYER_CELL_SIZE / 2;
-		while (x < PLAYER_CELL_SIZE / 2)
-		{
-			if (put_pixel(&game->mlx.screen, START_PIXEL_X + px + x,
-					START_PIXEL_Y + py + y, color))
-				return (-1);
-			x++;
-		}
-		y++;
-	}
-	return (0);
-}
+// 	px = game->config.player.pos.x * CELL_SIZE;
+// 	py = game->config.player.pos.y * CELL_SIZE;
+// 	y = -PLAYER_CELL_SIZE / 2;
+// 	while (y < PLAYER_CELL_SIZE / 2)
+// 	{
+// 		x = -PLAYER_CELL_SIZE / 2;
+// 		while (x < PLAYER_CELL_SIZE / 2)
+// 		{
+// 			if (put_pixel(&game->mlx.screen, START_PIXEL_X + px + x,
+// 					START_PIXEL_Y + py + y, color))
+// 				return (-1);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// 	return (0);
+// }
 
 void	init_fov(t_game *game, t_fov **fov)
 {

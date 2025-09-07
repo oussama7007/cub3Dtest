@@ -3,14 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   render_utils_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkolani <bkolani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 15:21:18 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/05 15:21:19 by bkolani          ###   ########.fr       */
+/*   Updated: 2025/09/07 17:18:53 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
+
+#define MINIMAP_RADIUS 60
+#define MINIMAP_SCALE 20
+
+// Filled circle
+int draw_filled_circle(t_img *img, int cx, int cy, int r, int color)
+{
+    for (int y = -r; y <= r; y++)
+    {
+        for (int x = -r; x <= r; x++)
+        {
+            if (x * x + y * y <= r * r)
+                put_pixel(img, cx + x, cy + y, color);
+        }
+    }
+    return (0);
+}
+
+// Circle outline
+int draw_circle(t_img *img, int cx, int cy, int r, int color)
+{
+    for (int angle = 0; angle < 360; angle++)
+    {
+        double rad = angle * M_PI / 180.0;
+        int x = cx + (int)(cos(rad) * r);
+        int y = cy + (int)(sin(rad) * r);
+        put_pixel(img, x, y, color);
+    }
+    return (0);
+}
+
+// Bresenham line
+int draw_line(t_img *img, int x0, int y0, int x1, int y1, int color)
+{
+    int dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
+    int dy = -abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
+    int err = dx + dy, e2;
+
+    while (1)
+    {
+        put_pixel(img, x0, y0, color);
+        if (x0 == x1 && y0 == y1)
+            break;
+        e2 = 2 * err;
+        if (e2 >= dy) { err += dy; x0 += sx; }
+        if (e2 <= dx) { err += dx; y0 += sy; }
+    }
+    return (0);
+}
 
 void	init_fov_in_loop(t_fov *fov, double angle, double r)
 {
@@ -98,31 +147,51 @@ int	draw_mini_map_check(t_game *game, int map_x, int map_y)
 		if (draw_map_door_cell(game, map_x, map_y, 0XFF0000))
 			return (-1);
 	}
+	
 	return (0);
 }
 
-int	draw_mini_map(t_game *game)
+int draw_mini_map(t_game *game, t_img screen)
 {
-	int	map_x;
-	int	map_y;
+    int center_x = MINIMAP_RADIUS + 20;
+    int center_y = HEIGHT - MINIMAP_RADIUS - 20;
 
-	map_y = -1;
-	if (game->config.map.height > HEIGHT / 10
-		|| game->config.map.width > WIDTH / 10)
-		return (print_err("Failed to draw mini "
-				"map; out of window sizes bounds\n"));
-	while (++map_y < game->config.map.height)
-	{
-		map_x = -1;
-		while (++map_x < (int)ft_strlen(game->config.map.grid[map_y]))
-		{
-			if (draw_mini_map_check(game, map_x, map_y))
-				return (-1);
-		}
-	}
-	if (draw_player_on_the_map(game, 0x0000FF))
-		return (-1);
-	if (draw_mini_map_fov(game))
-		return (-1);
-	return (0);
+    // background circle
+    draw_filled_circle(&screen, center_x, center_y, MINIMAP_RADIUS, 0xFFFFFFCC);
+
+    for (int y = 0; y < game->config.map.height; y++)
+    {
+        for (int x = 0; x < (int)ft_strlen(game->config.map.grid[y]); x++)
+        {
+            double dx = (x + 0.5 - game->config.player.pos.x) * MINIMAP_SCALE;
+            double dy = (y + 0.5 - game->config.player.pos.y) * MINIMAP_SCALE;
+
+            int screen_x = center_x + (int)dx;
+            int screen_y = center_y + (int)dy;
+
+            if (dx*dx + dy*dy <= MINIMAP_RADIUS * MINIMAP_RADIUS)
+            {
+                if (game->config.map.grid[y][x] == '1')
+                    put_pixel(&screen, screen_x, screen_y, 0xAAAAAA); // wall
+				else if (game->config.map.grid[y][x] == '3')
+					put_pixel(&screen, screen_x, screen_y, 0xFF0000); // item
+				else if (game->config.map.grid[y][x] == '4')
+					put_pixel(&screen, screen_x, screen_y, 0x00FF00); // item
+                else
+                    put_pixel(&screen, screen_x, screen_y, 0x333333); // floor
+            }
+        }
+    }
+
+    // player
+    draw_circle(&screen, center_x, center_y, 3, 0xFF0000);
+
+    // facing direction
+	int dir_x = (int)(game->config.player.dir.x * 15);
+	int dir_y = (int)(game->config.player.dir.y * 15);
+	draw_line(&screen, center_x, center_y,
+          center_x + dir_x, center_y + dir_y, 0xFF0000);
+
+    return (0);
 }
+
