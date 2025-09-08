@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkolani <bkolani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:20:36 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/07 16:24:58 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/08 12:56:47 by bkolani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@
 # include "sys/time.h"
 
 # define BUFFER_SIZE 42
+
+# define MINIMAP_RADIUS 100
+# define MINIMAP_SCALE 10
 
 # define WALL_TYPE 0
 # define DOOR_TYPE 1
@@ -63,23 +66,37 @@ typedef struct s_point
 	int	y;
 }	t_point;
 
-typedef struct s_fov
+typedef struct s_line
 {
-	int		x;
-	int		y;
-	double	dx;
-	double	dy;
-	int		px;
-	int		py;
-	double	player_angle;
-	int		intersection;
-	double	start_angle;
-	double	end_angle;
-	double	step;
-	int		map_x;
-	int		map_y;
-	double	range;
-}	t_fov;
+	int	x0;
+	int	y0;
+	int	x1;
+	int	y1;
+	int	dx;
+	int	dy;
+	int	sx;
+	int	sy;
+	int	err;
+	int	color;
+}	t_line;
+
+// typedef struct s_fov
+// {
+// 	int		x;
+// 	int		y;
+// 	double	dx;
+// 	double	dy;
+// 	int		px;
+// 	int		py;
+// 	double	player_angle;
+// 	int		intersection;
+// 	double	start_angle;
+// 	double	end_angle;
+// 	double	step;
+// 	int		map_x;
+// 	int		map_y;
+// 	double	range;
+// }	t_fov;
 
 typedef struct s_sprite
 {
@@ -169,6 +186,18 @@ typedef struct s_door
 	int			side_hit;
 }	t_door;
 
+typedef struct s_mini_map
+{
+	double		dx;
+	double		dy;
+	int			center_x;
+	int			center_y;
+	int			screen_x;
+	int			screen_y;
+	t_door		*door;
+	t_sprite	*item;
+}	t_mini_map;
+
 typedef struct s_config
 {
 	char			*no;
@@ -254,7 +283,7 @@ typedef struct s_game
 	int			last_x;
 	int			g_mouse_lock;
 	t_door		*door_in_front_of_player;
-	t_fov		mini_map_fov;
+	// t_fov		mini_map_fov;
 }	t_game;
 
 typedef struct s_queue
@@ -272,153 +301,164 @@ typedef struct s_bfs_args
 	char		**tmp_map;
 }	t_bfs_args;
 
-void	*gc_malloc(t_gc *gc, size_t size);
-void	gc_free(t_game *game);
+void		*gc_malloc(t_gc *gc, size_t size);
+void		gc_free(t_game *game);
 
 // UTILS FUNCTIONS
-int		print_err(const char *err_msg);
-size_t	ft_strlen(const char *str);
-char	*ft_strchr(const char *str, int c);
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
-char	*get_next_line(int fd, t_gc *gc);
-char	*ft_strjoin(char *s1, char *s2, t_gc *gc);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-char	*ft_strdup(const char *s, t_gc *gc);
-char	**ft_split(t_gc *gc, char const *s, char c);
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-int		ft_atoi(const char *str);
-int		ft_isspace(const char c);
-char	*ft_substr(char const *s, unsigned int start, size_t len, t_gc *gc);
-void	*ft_calloc(size_t count, size_t size);
-void	ft_bzero(void *s, size_t len);
-void	*ft_memset(void *b, int c, size_t len);
+int			print_err(const char *err_msg);
+size_t		ft_strlen(const char *str);
+char		*ft_strchr(const char *str, int c);
+char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
+char		*get_next_line(int fd, t_gc *gc);
+char		*ft_strjoin(char *s1, char *s2, t_gc *gc);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
+char		*ft_strdup(const char *s, t_gc *gc);
+char		**ft_split(t_gc *gc, char const *s, char c);
+size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
+int			ft_atoi(const char *str);
+int			ft_isspace(const char c);
+char		*ft_substr(char const *s, unsigned int start, size_t len, t_gc *gc);
+void		*ft_calloc(size_t count, size_t size);
+void		ft_bzero(void *s, size_t len);
+void		*ft_memset(void *b, int c, size_t len);
 
 // PARSING UTILS FUNCTIONS
-int		is_door_valide(char **grid, int x, int y);
-int		parse_color_helper(char **rgb, int *rgb_int, t_gc *gc, size_t len);
-void	free_split_alloc(char **arr);
-int		is_color_line(const char *line);
-int		is_color_integer(char *color, int *rgb_int, t_gc *gc);
-int		is_path_line(const char *line);
-int		is_map_config_line(const char *line);
-int		is_map_desc_line(const char *line);
-int		is_empty_line(const char *line);
-int		d_fill(t_config *config, char **tmp_map, int x, int y);
-int		flood_fill_space(t_config *config, char **tmp_map, int x, int y);
-void	set_player_x_pos(t_config *config, char *pos_line);
-void	set_player_orientation(t_player *player, char *pos_line);
-t_door	*get_door_in_front_helper(t_config *config, int idx);
+int			is_door_valide(char **grid, int x, int y);
+int			parse_color_helper(char **rgb, int *rgb_int, t_gc *gc, size_t len);
+void		free_split_alloc(char **arr);
+int			is_color_line(const char *line);
+int			is_color_integer(char *color, int *rgb_int, t_gc *gc);
+int			is_path_line(const char *line);
+int			is_map_config_line(const char *line);
+int			is_map_desc_line(const char *line);
+int			is_empty_line(const char *line);
+int			d_fill(t_config *config, char **tmp_map, int x, int y);
+int			flood_fill_space(t_config *config, char **tmp_map, int x, int y);
+void		set_player_x_pos(t_config *config, char *pos_line);
+void		set_player_orientation(t_player *player, char *pos_line);
+t_door		*get_door_in_front_helper(t_config *config, int idx);
 
 // PARSING FUNCTIONS
-int		validate_config(t_config *config, t_gc *gc);
-int		validate_map(t_config *config, t_gc *gc, size_t map_len);
-void	fetch_map_desc_lines(t_config *config, char **lines, t_gc *gc);
-int		parse_cub3d_map(t_config *config, t_gc *gc, const char *filename);
-int		parse_elements(t_config *config, t_gc *gc,
-			char **lines, size_t *map_len);
-int		ft_check_set(char c, char const *set);
-int		check_for_an_empty_space_in(char **rgb);
-void	init_values_to_iterate_on_line(int *i, int *map_started,
-			int *first_map_line, int *last_map_line);
-void	handle_vals_to_check_for_empty_line(int *i, int *map_started,
-			int *first_map_line, int *last_map_line);
-int		my_access(char *path);
-int		flood_fill_space_bfs(t_bfs_args *args, int x, int y);
-int		check_first_last_rows(t_map map, int i);
-int		check_middle_rows(t_map map, int i);
-int		check_player_count(char **tmp_map, int *player_count, int i);
-size_t	find_max_width(t_config *config);
-int		check_rgb_string(char *tmp);
-void	init_vars(int *front, int *back);
-void	set_plane(t_player *player, double x, double y);
-int		get_element_path(const char *line, t_config *config, t_gc *gc);
-int		parse_color(const char *line, t_config *config,
-			char conf_type, t_gc *gc);
-int		fill_sprites_and_doors_arrays(t_config *config);
-int		handle_config_line_err(t_config *config, char *line,
-			int map_started, t_gc *gc);
-void	set_player_details(t_config *config, char **tmp_map, int i);
-int		handle_config_line(t_config *config, t_gc *gc, char *line);
-int		add_sprite(t_config *config, double x, double y, int type);
-int		add_door(t_config *config, int x, int y);
-char	*clean_path(const char *line, t_gc *gc);
+int			validate_config(t_config *config, t_gc *gc);
+int			validate_map(t_config *config, t_gc *gc, size_t map_len);
+void		fetch_map_desc_lines(t_config *config, char **lines, t_gc *gc);
+int			parse_cub3d_map(t_config *config, t_gc *gc, const char *filename);
+int			parse_elements(t_config *config, t_gc *gc,
+				char **lines, size_t *map_len);
+int			ft_check_set(char c, char const *set);
+int			check_for_an_empty_space_in(char **rgb);
+void		init_values_to_iterate_on_line(int *i, int *map_started,
+				int *first_map_line, int *last_map_line);
+void		handle_vals_to_check_for_empty_line(int *i, int *map_started,
+				int *first_map_line, int *last_map_line);
+int			my_access(char *path);
+int			flood_fill_space_bfs(t_bfs_args *args, int x, int y);
+int			check_first_last_rows(t_map map, int i);
+int			check_middle_rows(t_map map, int i);
+int			check_player_count(char **tmp_map, int *player_count, int i);
+size_t		find_max_width(t_config *config);
+int			check_rgb_string(char *tmp);
+void		init_vars(int *front, int *back);
+void		set_plane(t_player *player, double x, double y);
+int			get_element_path(const char *line, t_config *config, t_gc *gc);
+int			parse_color(const char *line, t_config *config,
+				char conf_type, t_gc *gc);
+int			fill_sprites_and_doors_arrays(t_config *config);
+int			handle_config_line_err(t_config *config, char *line,
+				int map_started, t_gc *gc);
+void		set_player_details(t_config *config, char **tmp_map, int i);
+int			handle_config_line(t_config *config, t_gc *gc, char *line);
+int			add_sprite(t_config *config, double x, double y, int type);
+int			add_door(t_config *config, int x, int y);
+char		*clean_path(const char *line, t_gc *gc);
 
 // RENDER FUNCTIONS
-int		rendering(t_game *game);
-int		init_mlx(t_mlx *mlx_);
+int			rendering(t_game *game);
+int			init_mlx(t_mlx *mlx_);
 // int		render_frame(t_game *game);
 
 // RENDER UTILS FUNCTIONS 
-void	open_door(t_game *game);
-int		draw_background(t_game *game);
-int		put_pixel(t_img *img, int x, int y, int color);
-int		get_texture_pixels(t_img *tex, int x, int y);
-int		draw_mini_map(t_game *game, t_img screen);
-void	calculate_dist_camera_to_sprite(t_config *config);
-void	sort_sprites_by_distance(t_sprite *sprites, int count);
-void	update_sprites_animation(t_game *game);
-void	update_all_doors(t_config *config);
-void	render_all_sprites(t_game *game);
-void	init_fov(t_game *game, t_fov **fov);
-int		draw_map_wall_cell(t_img *screen, int map_x, int map_y, int color);
-int		is_item_active(t_config *config, int x, int y);
-int		draw_map_item_cell(t_game *game, int map_x, int map_y, int color);
-int		draw_map_door_cell(t_game *game, int map_x, int map_y, int color);
-int		draw_player_on_the_map(t_game *game, int color);
-int		draw_opened_door_side_y(t_game *game, int color,
-			int pixel_x, int pixel_y);
-int		draw_opened_door_side_x(t_game *game, int color,
-			int pixel_x, int pixel_y);
-int		draw_closed_door_side_y(t_game *game, int color,
-			int pixel_x, int pixel_y);
-int		draw_closed_door_side_x(t_game *game, int color,
-			int pixel_x, int pixel_y);
-int		project_and_render_sprite(t_game *game, t_sprite *sprite);
+void		open_door(t_game *game);
+int			draw_background(t_game *game);
+int			put_pixel(t_img *img, int x, int y, int color);
+int			get_texture_pixels(t_img *tex, int x, int y);
+int			draw_mini_map(t_game *game, t_img screen);
+void		calculate_dist_camera_to_sprite(t_config *config);
+void		sort_sprites_by_distance(t_sprite *sprites, int count);
+void		update_sprites_animation(t_game *game);
+void		update_all_doors(t_config *config);
+void		render_all_sprites(t_game *game);
+t_sprite	*detect_item_(t_config *config, int x, int y);
+// void	init_fov(t_game *game, t_fov **fov);
+// int			draw_map_wall_cell(t_img *screen,
+// int map_x, int map_y, int color);
+int			is_item_active(t_config *config, int x, int y);
+// int			draw_map_item_cell(t_game *game, int map_x,
+// int map_y, int color);
+// int			draw_map_door_cell(t_game *game, int map_x,
+// int map_y, int color);
+// int			draw_player_on_the_map(t_game *game, int color);
+// int			draw_opened_door_side_y(t_game *game, int color,
+// 				int pixel_x, int pixel_y);
+// int			draw_opened_door_side_x(t_game *game, int color,
+// 				int pixel_x, int pixel_y);
+// int			draw_closed_door_side_y(t_game *game, int color,
+// 				int pixel_x, int pixel_y);
+// int			draw_closed_door_side_x(t_game *game, int color,
+// 				int pixel_x, int pixel_y);
+int			project_and_render_sprite(t_game *game, t_sprite *sprite);
+int			draw_square(t_img *img, int x, int y, int color);
+int			draw_filled_circle(t_img *img, int cx, int cy, int r);
+int			draw_line_loop(t_img *img, t_line *ln);
+int			draw_line(t_img *img, t_line *ln);
+int			draw_line_(t_game *game, int center_x, int center_y);
+int			draw_item_cell(t_game *game, t_mini_map *m_map, int x, int y);
+int			draw_door_cell(t_game *game, t_mini_map *m_map, int x, int y);
 
 // RAYCASTING FUNCTIONS
-int		raycasting(t_game *game);
+int			raycasting(t_game *game);
 // int 	render_frame(t_game *game);
-void	perform_dda(t_ray *ray, t_config *config);
-void	init_dda(t_ray *ray, t_config *config);
-void	compute_projection(t_ray *ray);
-int		draw_column(t_ray *ray, t_game *game, int x);
+void		perform_dda(t_ray *ray, t_config *config);
+void		init_dda(t_ray *ray, t_config *config);
+void		compute_projection(t_ray *ray);
+int			draw_column(t_ray *ray, t_game *game, int x);
 // void    cast_single_ray(t_game *game, int x);
-int		dda_hit_door(t_config *config, t_ray *ray);
-void	get_x_side_door_dir_text(t_ray *ray, t_door *door, int *dir_tex);
-void	get_y_side_door_dir_text(t_ray *ray, t_door *door, int *dir_tex);
-void	init_text_helper(t_config *config, t_ray *ray, double *wall_x);
-int		draw_col_helper(t_game *game, t_ray *ray, t_img *texture, int x);
-int		apply_shadow(int color, double distance, int side);
+int			dda_hit_door(t_config *config, t_ray *ray);
+void		get_x_side_door_dir_text(t_ray *ray, t_door *door, int *dir_tex);
+void		get_y_side_door_dir_text(t_ray *ray, t_door *door, int *dir_tex);
+void		init_text_helper(t_config *config, t_ray *ray, double *wall_x);
+int			draw_col_helper(t_game *game, t_ray *ray, t_img *texture, int x);
+int			apply_shadow(int color, double distance, int side);
 
 // PLAYER AND ENEMYS MOVEMENTS AND EVENTS
-int		update_player(t_game *game);
-int		key_press(int keycode, t_game *game);
-int		key_release(int keycode, t_game *game);
-void	move_forward(t_game *game);
-void	move_backward(t_game *game);
-void	strafe_left(t_game *game);
-void	strafe_right(t_game *game);
-int		mouse_move_handler(int x, int y, t_game *game);
-int		mouse_click_handler(int button, int x, int y, t_game *game);
-void	handle_x_movement(t_game *game, double next_x);
-void	handle_y_movement(t_game *game, double next_y);
-void	detect_item(t_config *config, int x, int y);
-int		find_player_position(t_config *config, char **tmp_map);
+int			update_player(t_game *game);
+int			key_press(int keycode, t_game *game);
+int			key_release(int keycode, t_game *game);
+void		move_forward(t_game *game);
+void		move_backward(t_game *game);
+void		strafe_left(t_game *game);
+void		strafe_right(t_game *game);
+int			mouse_move_handler(int x, int y, t_game *game);
+int			mouse_click_handler(int button, int x, int y, t_game *game);
+void		handle_x_movement(t_game *game, double next_x);
+void		handle_y_movement(t_game *game, double next_y);
+void		detect_item(t_config *config, int x, int y);
+int			find_player_position(t_config *config, char **tmp_map);
 
 // ROTATE CAMERA
-void	rotate_left(t_game *game);
-void	rotate_right(t_game *game);
+void		rotate_left(t_game *game);
+void		rotate_right(t_game *game);
 
 // CLOSE GAME
-int		close_window(t_game *game);
+int			close_window(t_game *game);
 
 // LOAD TEXTURES FUNCTION
-void	load_wall_all_tex(t_game *game);
-void	load_all_sprites_tex(t_game *game);
-void	load_door_all_text(t_game *game);
+void		load_wall_all_tex(t_game *game);
+void		load_all_sprites_tex(t_game *game);
+void		load_door_all_text(t_game *game);
 
 // DOORS UTILS
-t_door	*find_door(t_config *config, int map_x, int map_y);
-t_door	*get_door_in_front_of_player(t_config *config);
+t_door		*find_door(t_config *config, int map_x, int map_y);
+t_door		*get_door_in_front_of_player(t_config *config);
 
 #endif

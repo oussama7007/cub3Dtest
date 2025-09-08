@@ -2,7 +2,7 @@ NAME = cub3D
 NAME_BONUS = cub3D_bonus
 
 CC = cc 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 
 LIBMLX = -L../minilibx_opengl_20191021 -I../minilibx_opengl_20191021 -lmlx -framework OpenGL -framework AppKit
 
@@ -52,7 +52,6 @@ SRCS_BONUS = src_bonus/cub3d_bonus.c utils/error.c utils/ft_strlen.c \
 		src_bonus/render_bonus/rendering_bonus.c \
 		src_bonus/init_bonus/init_mlx_bonus.c \
 		src_bonus/render_bonus/render_utils_bonus.c \
-		src_bonus/render_bonus/render_utils_bonus_0.c \
 		src_bonus/render_bonus/raycasting_bonus.c \
 		src_bonus/render_bonus/raycasting_utils_bonus.c \
 		src_bonus/render_bonus/raycasting_utils_bonus_0.c \
@@ -75,7 +74,7 @@ OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 all: $(NAME)
 
-%.o: %.c $(HEADER) $(HEADER_BONUS)
+%.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)

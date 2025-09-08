@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkolani <bkolani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:03:39 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/06 15:08:29 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/08 10:35:39 by bkolani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	find_player_position(t_config *config, char **tmp_map)
 				|| ft_strchr(tmp_map[i], 'W')))
 			set_player_details(config, tmp_map, i);
 	}
+	if (player_count == 0)
+		return (print_err("Error: Player not found\n"));
 	return (0);
 }
 

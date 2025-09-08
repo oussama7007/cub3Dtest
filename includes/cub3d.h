@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkolani <bkolani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:38:04 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/07 16:55:10 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/08 12:56:58 by bkolani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,14 +281,5 @@ int		close_window(t_game *game);
 
 // LOAD TEXTURES FUNCTION
 t_img	load_texture(t_game *game, char *file);
-
-
-
-
-
-
-
-
-
 
 #endif

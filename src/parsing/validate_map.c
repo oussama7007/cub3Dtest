@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkolani <bkolani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 16:55:31 by oait-si-          #+#    #+#             */
-/*   Updated: 2025/09/05 13:26:01 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/08 10:33:58 by bkolani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ int	find_player_position(t_config *config, char **tmp_map)
 				|| ft_strchr(tmp_map[i], 'W')))
 			set_player_details(config, tmp_map, i);
 	}
+	if (player_count == 0)
+		return (print_err("Error: Player not found\n"));
 	return (0);
 }
 

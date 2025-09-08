@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkolani <bkolani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 15:21:31 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/07 16:24:42 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/08 11:23:52 by bkolani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	game_loop(t_game *game)
 	update_sprites_animation(game);
 	update_all_doors(&game->config);
 	render_all_sprites(game);
-	// New function to draw the mini map
 	if (draw_mini_map(game, game->mlx.screen))
 	{
 		gc_free(game);
