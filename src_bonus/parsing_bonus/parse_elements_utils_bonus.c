@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_elements_utils_bonus.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkolani <bkolani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 15:29:43 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/05 17:02:03 by bkolani          ###   ########.fr       */
+/*   Updated: 2025/09/09 12:17:16 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,6 @@ int	is_path_line(const char *line)
 		|| !ft_strncmp(line, "EA ", 3) || !ft_strncmp(line, "WE ", 3))
 		return (1);
 	return (0);
-}
-
-void	free_split_alloc(char **arr)
-{
-	int	i;
-
-	i = -1;
-	while (arr[++i])
-		free(arr[i]);
-	free(arr);
 }
 
 int	check_rgb_string(char *tmp)

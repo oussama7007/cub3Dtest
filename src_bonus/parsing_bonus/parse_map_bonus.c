@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 14:26:15 by oait-si-          #+#    #+#             */
-/*   Updated: 2025/09/06 15:08:37 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/09 13:12:55 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,6 @@ int	parse_cub3d_map(t_config *config, t_gc *gc, const char *filename)
 		|| validate_config(config, gc)
 		|| validate_map(config, gc, map_desc_len))
 		return (-1);
-	config->map.grid[(int)config->player.pos.y]
-	[(int)config->player.pos.x] = '0';
 	if (fill_sprites_and_doors_arrays(config))
 		return (-1);
 	return (0);

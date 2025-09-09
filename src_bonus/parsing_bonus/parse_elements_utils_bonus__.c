@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:01:11 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/06 14:27:30 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/09 12:25:40 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,33 +30,6 @@ int	is_color_line(const char *line)
 		return (0);
 	return (1);
 }
-
-// int	is_color_integer(char *color, int *rgb_int, t_gc *gc)
-// {
-// 	size_t	i;
-// 	char	*str_without_new_line;
-
-// 	i = 0;
-// 	str_without_new_line = NULL;
-// 	while (i < ft_strlen(color))
-// 	{
-// 		if (!(color[i] >= '0' && color[i] <= '9')
-// 			&& color[i] != '\n' && color[i] != '-'
-// 			&& color[i] != '+')
-// 			return (0);
-// 		if (color[i] == '\n')
-// 		{
-// 			str_without_new_line = ft_substr(color, 0, i, gc);
-// 			break ;
-// 		}
-// 		i++;
-// 	}
-// 	if (str_without_new_line != NULL)
-// 		*rgb_int = ft_atoi(str_without_new_line);
-// 	else
-// 		*rgb_int = ft_atoi(color);
-// 	return (1);
-// }
 
 int	is_color_integer(char *color, int *rgb_int, t_gc *gc)
 {

@@ -3,35 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkolani <bkolani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 15:33:06 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/08 10:35:12 by bkolani          ###   ########.fr       */
+/*   Updated: 2025/09/09 12:40:27 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
-
-// static int detect_map_leaks(t_config *config, char **tmp)
-// {
-//     int x;
-//     int y;
-
-//     y = -1;
-//     while (++y < config->map.height)
-//     {
-//         x = -1;
-//         while (++x < config->map.width)
-//         {
-//             if (tmp[y][x] == ' ')
-//             {
-//                 if (!flood_fill_space(config, tmp, x, y))
-//                     return (-1);
-//             }
-//         }
-//     }
-//     return (0);
-// }
 
 static int	detect_map_leaks(t_gc *gc, t_config *config, char **tmp)
 {
@@ -126,31 +105,3 @@ int	validate_map(t_config *config, t_gc *gc, size_t map_len)
 		return (print_err("Map error: leak detected!\n"));
 	return (0);
 }
-
-// int validate_map(t_config *config, t_gc *gc, size_t map_len)
-// {
-//     int i;
-//     size_t  max_len;
-//     char    **tmp;
-
-//     max_len = 0;
-//     i = -1;
-//     if (check_walls(config->map))
-//         return (-1);
-//     while (config->map.grid[++i])
-//     {
-//         if (ft_strlen(config->map.grid[i]) > max_len)
-//             max_len = ft_strlen(config->map.grid[i]);
-//     }
-//     config->map.width = max_len;
-//     tmp = gc_malloc(gc, sizeof(char *) * (map_len + 1));
-//     if (!tmp)
-//         return (print_err("Allocation failed\n"));
-//     if (normalized(config->map.grid, tmp, gc, max_len))
-//         return (-1);
-//     if (find_player_position(config, tmp))
-//         return (-1);
-//     if (detect_map_leaks(gc, config, tmp))
-//         return (print_err("Map error: leak detected on the map!\n"));
-//     return (0);
-// }
