@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:41:03 by oait-si-          #+#    #+#             */
-/*   Updated: 2025/09/05 11:07:55 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/10 17:23:49 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ int	iterate_on_lines(t_config *config, t_gc *gc, char **lines, size_t *map_len)
 		}
 		else if (is_map_desc_line(lines[i]))
 		{
+			if(!config->last_map.path_flag || !config->last_map.color_flag)
+				return (print_err("Error:  the map content which always has to be the last!\n"));
 			handle_vals_to_check_for_empty_line(&i, &map_started,
 				&f_map_line, &l_map_line);
 			(*map_len)++;

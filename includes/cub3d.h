@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:38:04 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/10 17:06:12 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/10 17:06:56 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ typedef struct s_is_last
 	int color_flag;
 	int path_flag;
 }t_is_last;
-
-
-
 
 typedef enum e_texture
 {
