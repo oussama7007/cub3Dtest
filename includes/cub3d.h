@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkolani <bkolani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:38:04 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/08 12:56:58 by bkolani          ###   ########.fr       */
+/*   Updated: 2025/09/10 17:06:12 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@
 // Pour le rendu
 # define HEIGHT 720
 # define WIDTH 1280
+
+typedef struct s_is_last
+{
+	int color_flag;
+	int path_flag;
+}t_is_last;
+
+
+
 
 typedef enum e_texture
 {
@@ -69,6 +78,7 @@ typedef struct s_map
 
 typedef struct s_config
 {
+	t_is_last	last_map;
 	char		*no;
 	char		*so;
 	char		*ea;

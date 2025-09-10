@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_textures_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkolani <bkolani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 15:20:18 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/05 15:20:20 by bkolani          ###   ########.fr       */
+/*   Updated: 2025/09/09 15:30:37 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static t_img	load_texture(t_game *game, char *file)
 	if (!tex.img_ptr)
 	{
 		gc_free(game);
+		printf("ksdhjfkjsdhf\n");
 		exit(-1);
 	}
 	tex.img_data_addr = mlx_get_data_addr(tex.img_ptr, &tex.bits_per_pixel,
