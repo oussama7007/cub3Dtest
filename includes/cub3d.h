@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:38:04 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/10 17:06:56 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/11 12:23:10 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,15 @@ typedef enum e_texture
 	WEST,
 	EAST
 }	t_texture;
+
+typedef struct 	s_iter_state
+{
+	int i;
+	int map_started;
+	int f_map_line;
+	int l_map_line;
+}	t_iter_state;
+
 
 // STRUCT FOR A VERTICAL LINE WHEN A RAY TOUCH A WALL
 typedef struct s_draw
@@ -184,6 +193,15 @@ typedef struct s_bfs_args
 	char		**tmp_map;
 }	t_bfs_args;
 
+typedef struct s_parse_ctx
+{
+	t_config		*config;
+	t_gc			*gc;
+	char			**lines;
+	t_iter_state	*state;
+	size_t			*map_len;
+}	t_parse_ctx;
+
 // MEMORY MANAGEMENT
 void	*gc_malloc(t_gc *gc, size_t size);
 void	gc_free(t_game *game);
@@ -236,7 +254,7 @@ void	set_player_x_pos(t_config *config, char *pos_line);
 void	set_player_orientation(t_player *player, char *pos_line);
 int		handle_config_line(t_config *config, t_gc *gc, char *line);
 char	*clean_path(const char *line, t_gc *gc);
-
+int 	process_line(t_parse_ctx *context);
 // PARSING FUNCTIONS
 int		validate_config(t_config *config, t_gc *gc);
 int		validate_map(t_config *config, t_gc *gc, size_t map_len);

@@ -4,7 +4,7 @@ NAME_BONUS = cub3D_bonus
 CC = cc 
 CFLAGS = -Wall -Wextra -Werror 
 
-LIBMLX = -L../minilibx_opengl_20191021 -lmlx -framework OpenGL -framework AppKit
+LIBMLX = -L ../minilibx_opengl_20191021 -lmlx -framework OpenGL -framework AppKit
 
 
 HEADER = includes/cub3d.h

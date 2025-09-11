@@ -6,18 +6,15 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 14:24:15 by oait-si-          #+#    #+#             */
-/*   Updated: 2025/09/09 15:26:51 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/11 12:25:32 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
-void 	t(void)
-{
-	system("leaks cub3D_bonus");
-}
+
 int	main(int ac, const char **av)
 {
-	atexit(t);	
+
 	t_game	*game;
 
 	if (ac != 2)
