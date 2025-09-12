@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 17:42:06 by oait-si-          #+#    #+#             */
-/*   Updated: 2025/09/12 17:12:28 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/12 17:14:36 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	check_for_invalide_char(char **tmp_map, t_point p)
 {
 	return (tmp_map[p.y][p.x] == '0' || tmp_map[p.y][p.x] == 'N'
 		|| tmp_map[p.y][p.x] == 'S' || tmp_map[p.y][p.x] == 'E'
-		|| tmp_map[p.y][p.x] == 'W' || ft_isspace(tmp_map[p.y][p.x]));
+		|| tmp_map[p.y][p.x] == 'W' );
 }
 
 static int	process_point(t_bfs_args *args, t_point p,
