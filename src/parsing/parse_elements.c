@@ -64,9 +64,10 @@ int	get_element_path(const char *line, t_config *config, t_gc *gc)
 int	iterate_on_lines(t_config *config, t_gc *gc, char **lines, size_t *map_len)
 {
 	t_iter_state	list;
-	t_parse_ctx 	context;
-	
-	init_values_to_iterate_on_line(&list.i, &list.map_started, &list.f_map_line, &list.l_map_line);
+	t_parse_ctx		context;
+
+	init_values_to_iterate_on_line(&list.i, &list.map_started,
+		&list.f_map_line, &list.l_map_line);
 	context.config = config;
 	context.gc = gc;
 	context.lines = lines;
@@ -74,10 +75,11 @@ int	iterate_on_lines(t_config *config, t_gc *gc, char **lines, size_t *map_len)
 	context.map_len = map_len;
 	while (lines[++list.i])
 	{
-		if(process_line(&context))
-			return(-1);
+		if (process_line(&context))
+			return (-1);
 	}
-	if (*map_len > 0 && *map_len != (size_t)(list.l_map_line - list.f_map_line + 1))
+	if (*map_len > 0 && *map_len
+		!= (size_t)(list.l_map_line - list.f_map_line + 1))
 		return (print_err("Error: Empty lines inside map description!\n"));
 	return (0);
 }

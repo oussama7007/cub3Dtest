@@ -80,7 +80,9 @@ int	rendering(t_game *game)
 	game->mlx.screen.img_ptr = mlx_new_image(game->mlx.mlx_ptr, WIDTH, HEIGHT);
 	if (!game->mlx.screen.img_ptr)
 		return (print_err("mlx error: Failed to create mlx image\n"));
-	game->mlx.screen.img_data_addr = mlx_get_data_addr(game->mlx.screen.img_ptr, &game->mlx.screen.bits_per_pixel, &game->mlx.screen.line_length, &game->mlx.screen.endian);
+	game->mlx.screen.img_data_addr = mlx_get_data_addr(game->mlx.screen.img_ptr,
+			&game->mlx.screen.bits_per_pixel, &game->mlx.screen.line_length,
+			&game->mlx.screen.endian);
 	if (!game->mlx.screen.img_data_addr)
 		return (print_err("mlx error: Failed to get image address\n"));
 	game->config.z_buffer = gc_malloc(game->gc, sizeof(double) * WIDTH);

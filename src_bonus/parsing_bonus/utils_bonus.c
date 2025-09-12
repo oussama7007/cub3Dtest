@@ -71,11 +71,10 @@ int	is_door_valide(char **grid, int x, int y)
 	return (1);
 }
 
-
-int 	process_line(t_parse_ctx *context)
+int	process_line(t_parse_ctx *context)
 {
-	int i;
-	
+	int	i;
+
 	i = context->state->i;
 	if (is_map_config_line(context->lines[i]))
 	{
@@ -85,13 +84,15 @@ int 	process_line(t_parse_ctx *context)
 	}
 	else if (is_map_desc_line(context->lines[i]))
 	{
-		if (!context->config->last_map.path_flag || !context->config->last_map.color_flag)
+		if (!context->config->last_map.path_flag
+			|| !context->config->last_map.color_flag)
 			return (print_err("Error: the map content must be the last!\n"));
-		handle_vals_to_check_for_empty_line(&context->state->i, &context->state->map_started,
+		handle_vals_to_check_for_empty_line(&context->state->i,
+			&context->state->map_started,
 			&context->state->f_map_line, &context->state->l_map_line);
 		(*context->map_len)++;
 	}
 	else if (!is_empty_line(context->lines[i]))
 		return (print_err("Error: Invalid configuration line!\n"));
-	return 0;
+	return (0);
 }
