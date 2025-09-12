@@ -255,6 +255,7 @@ void	set_player_orientation(t_player *player, char *pos_line);
 int		handle_config_line(t_config *config, t_gc *gc, char *line);
 char	*clean_path(const char *line, t_gc *gc);
 int 	process_line(t_parse_ctx *context);
+char	*ft_strtrim(char const *s1, char const *set, t_gc *gc);
 // PARSING FUNCTIONS
 int		validate_config(t_config *config, t_gc *gc);
 int		validate_map(t_config *config, t_gc *gc, size_t map_len);
@@ -265,7 +266,7 @@ int		parse_elements(t_config *config,
 size_t	find_max_width(t_config *config);
 int		check_player_count(char **tmp_map, int *player_count, int i);
 int		check_first_last_rows(t_map map, int i);
-int		check_middle_rows(t_map map, int i);
+int		check_middle_rows(t_map map, int i, t_gc *gc);
 
 // RENDER FUNCTIONS
 int		rendering(t_game *game);

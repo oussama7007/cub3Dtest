@@ -360,6 +360,7 @@ int			flood_fill_space(t_config *config, char **tmp_map, int x, int y);
 void		set_player_x_pos(t_config *config, char *pos_line);
 void		set_player_orientation(t_player *player, char *pos_line);
 t_door		*get_door_in_front_helper(t_config *config, int idx);
+char		*ft_strtrim(char const *s1, char const *set, t_gc *gc);
 
 // PARSING FUNCTIONS
 int			validate_config(t_config *config, t_gc *gc);
@@ -377,7 +378,7 @@ void		handle_vals_to_check_for_empty_line(int *i, int *map_started,
 int			my_access(char *path);
 int			flood_fill_space_bfs(t_bfs_args *args, int x, int y);
 int			check_first_last_rows(t_map map, int i);
-int			check_middle_rows(t_map map, int i);
+int			check_middle_rows(t_map map, int i, t_gc *gc);
 int			check_player_count(char **tmp_map, int *player_count, int i);
 size_t		find_max_width(t_config *config);
 int			check_rgb_string(char *tmp);

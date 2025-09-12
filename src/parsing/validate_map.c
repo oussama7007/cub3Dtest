@@ -37,7 +37,7 @@ static int	detect_map_leaks(t_gc *gc, t_config *config, char **tmp)
 	return (0);
 }
 
-static int	check_walls(t_map map)
+static int	check_walls(t_map map, t_gc *gc)
 {
 	int	i;
 
@@ -51,7 +51,7 @@ static int	check_walls(t_map map)
 		}
 		else
 		{
-			if (check_middle_rows(map, i))
+			if (check_middle_rows(map, i, gc))
 				return (-1);
 		}
 	}
@@ -91,7 +91,7 @@ int	validate_map(t_config *config, t_gc *gc, size_t map_len)
 	char	**tmp;
 	size_t	max_len;
 
-	if (check_walls(config->map))
+	if (check_walls(config->map, gc))
 		return (-1);
 	max_len = find_max_width(config);
 	config->map.width = max_len;

@@ -12,17 +12,29 @@
 
 #include "../../includes/cub3d_bonus.h"
 
-int	check_middle_rows(t_map map, int i)
+int	check_middle_rows(t_map map, int i, t_gc *gc)
 {
-	int	last_char_idx;
+	int		last_char_idx;
+	char	*str_trimmed;
 
-	last_char_idx = ft_strlen(map.grid[i]) - 1;
-	if ((map.grid[i][0] != '1' && !ft_isspace(map.grid[i][0]))
-		|| (map.grid[i][last_char_idx] != '1'
-		&& !ft_isspace(map.grid[i][last_char_idx])))
-		return (print_err("Map error: invalid walls!\n"));
+	str_trimmed = ft_strtrim(map.grid[i], " \t\n\r", gc);
+	last_char_idx = ft_strlen(str_trimmed) - 1;
+	if (str_trimmed[0] != '1' || str_trimmed[last_char_idx] != '1')
+		return (print_err("Map error: Invalid row!\n"));
 	return (0);
 }
+
+// int	check_middle_rows(t_map map, int i)
+// {
+// 	int	last_char_idx;
+
+// 	last_char_idx = ft_strlen(map.grid[i]) - 1;
+// 	if ((map.grid[i][0] != '1' && !ft_isspace(map.grid[i][0]))
+// 		|| (map.grid[i][last_char_idx] != '1'
+// 		&& !ft_isspace(map.grid[i][last_char_idx])))
+// 		return (print_err("Map error: invalid walls!\n"));
+// 	return (0);
+// }
 
 void	init_vars(int *front, int *back)
 {
