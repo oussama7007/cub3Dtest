@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:20:36 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/09 12:17:22 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/12 16:38:17 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,12 @@ typedef struct s_point
 	int	y;
 }	t_point;
 
+typedef struct s_is_last
+{
+	int color_flag;
+	int path_flag;
+}t_is_last;
+
 typedef struct s_line
 {
 	int	x0;
@@ -120,6 +126,14 @@ typedef struct s_sprite
 	bool	active;
 	bool	is_open;
 }	t_sprite;
+
+typedef struct 	s_iter_state
+{
+	int i;
+	int map_started;
+	int f_map_line;
+	int l_map_line;
+}	t_iter_state;
 
 typedef struct s_item
 {
@@ -200,6 +214,7 @@ typedef struct s_mini_map
 
 typedef struct s_config
 {
+	t_is_last	last_map;
 	char			*no;
 	char			*so;
 	char			*ea;
@@ -294,6 +309,15 @@ typedef struct s_queue
 	int		back;
 }	t_queue;
 
+typedef struct s_parse_ctx
+{
+	t_config		*config;
+	t_gc			*gc;
+	char			**lines;
+	t_iter_state	*state;
+	size_t			*map_len;
+}	t_parse_ctx;
+
 typedef struct s_bfs_args
 {
 	t_gc		*gc;
@@ -363,8 +387,8 @@ int			get_element_path(const char *line, t_config *config, t_gc *gc);
 int			parse_color(const char *line, t_config *config,
 				char conf_type, t_gc *gc);
 int			fill_sprites_and_doors_arrays(t_config *config);
-int			handle_config_line_err(t_config *config, char *line,
-				int map_started, t_gc *gc);
+int	handle_config_line_err(t_config *config, t_gc *gc, char *line,
+		int map_started);
 void		set_player_details(t_config *config, char **tmp_map, int i);
 int			handle_config_line(t_config *config, t_gc *gc, char *line);
 int			add_sprite(t_config *config, double x, double y, int type);
@@ -413,7 +437,7 @@ int			draw_line(t_img *img, t_line *ln);
 int			draw_line_(t_game *game, int center_x, int center_y);
 int			draw_item_cell(t_game *game, t_mini_map *m_map, int x, int y);
 int			draw_door_cell(t_game *game, t_mini_map *m_map, int x, int y);
-
+int 	process_line(t_parse_ctx *context);
 // RAYCASTING FUNCTIONS
 int			raycasting(t_game *game);
 // int 	render_frame(t_game *game);

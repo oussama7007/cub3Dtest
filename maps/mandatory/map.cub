@@ -3,17 +3,13 @@ SO ./textures/wall_south.xpm
 WE ./textures/wall_west.xpm
 EA ./textures/wall_east.xpm      
 
-
-
-
-11111
-1100N 
-11111
-
-
-
-
 F 220,100,0
 C 225,30,0
+
+
+
+11111111
+110000N01
+11111111
 
 

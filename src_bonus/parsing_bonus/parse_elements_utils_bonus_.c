@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 16:55:51 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/06 14:39:20 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/12 16:38:29 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ int	parse_color(const char *line, t_config *config,
 	return (0);
 }
 
-int	handle_config_line_err(t_config *config, char *line,
-	int map_started, t_gc *gc)
+int	handle_config_line_err(t_config *config, t_gc *gc, char *line,
+		int map_started)
 {
 	(void)map_started;
 	if (handle_config_line(config, gc, line))

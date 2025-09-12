@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkolani <bkolani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:03:39 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/08 10:35:39 by bkolani          ###   ########.fr       */
+/*   Updated: 2025/09/12 16:32:22 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,29 @@ int	is_door_valide(char **grid, int x, int y)
 		|| (grid[y + 1][x] == '1' && grid[y - 1][x] == '1')))
 		return (0);
 	return (1);
+}
+
+
+int 	process_line(t_parse_ctx *context)
+{
+	int i;
+	
+	i = context->state->i;
+	if (is_map_config_line(context->lines[i]))
+	{
+		if (handle_config_line_err(context->config, context->gc,
+				context->lines[i], context->state->map_started))
+			return (-1);
+	}
+	else if (is_map_desc_line(context->lines[i]))
+	{
+		if (!context->config->last_map.path_flag || !context->config->last_map.color_flag)
+			return (print_err("Error: the map content must be the last!\n"));
+		handle_vals_to_check_for_empty_line(&context->state->i, &context->state->map_started,
+			&context->state->f_map_line, &context->state->l_map_line);
+		(*context->map_len)++;
+	}
+	else if (!is_empty_line(context->lines[i]))
+		return (print_err("Error: Invalid configuration line!\n"));
+	return 0;
 }

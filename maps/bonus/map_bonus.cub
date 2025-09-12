@@ -1,9 +1,7 @@
 
 
 
-11111
-1000N1
-11111
+
 
 NO ./textures/wall_north.xpm
 SO ./textures/wall_south.xpm
@@ -18,4 +16,6 @@ C 225,30,0
 
 
 
-
+11111
+1000N
+11111

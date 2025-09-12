@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:41:03 by oait-si-          #+#    #+#             */
-/*   Updated: 2025/09/11 12:23:28 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/12 15:36:39 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	iterate_on_lines(t_config *config, t_gc *gc, char **lines, size_t *map_len)
 {
 	t_iter_state	list;
 	t_parse_ctx 	context;
+	
 	init_values_to_iterate_on_line(&list.i, &list.map_started, &list.f_map_line, &list.l_map_line);
 	context.config = config;
 	context.gc = gc;

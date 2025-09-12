@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_config_utils.c                            :+:      :+:    :+:   */
+/*   validate_config_utils_bonus.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkolani <bkolani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 15:32:53 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/05 15:32:55 by bkolani          ###   ########.fr       */
+/*   Updated: 2025/09/12 16:35:51 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,13 @@ int	handle_config_line(t_config *config, t_gc *gc, char *line)
 {
 	if (is_path_line(line))
 	{
+		config->last_map.path_flag = 1;
 		if (get_element_path(line, config, gc))
 			return (-1);
 	}
 	else if (is_color_line(line))
 	{
+		config->last_map.color_flag = 1;
 		if ((!ft_strncmp(line, "F ", 2) && config->floor_found)
 			|| (!ft_strncmp(line, "C ", 2) && config->ceil_found))
 			return (print_err("Error: Color configuration line duplicated\n"));
