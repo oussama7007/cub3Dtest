@@ -21,7 +21,6 @@ static t_img	load_texture(t_game *game, char *file)
 	if (!tex.img_ptr)
 	{
 		gc_free(game);
-		printf("ksdhjfkjsdhf\n");
 		exit(-1);
 	}
 	tex.img_data_addr = mlx_get_data_addr(tex.img_ptr, &tex.bits_per_pixel,
@@ -56,6 +55,12 @@ static void	load_item_sprites(t_game *game, int type,
 	i = -1;
 	while (++i < frames_count)
 	{
+		if (my_access(files_paths[i]))
+		{
+			printf("Error occured while opening the file\n");
+			gc_free(game);
+			exit(-1);
+		}
 		game->sprite_textures[type][i].img_ptr
 			= mlx_xpm_file_to_image(game->mlx.mlx_ptr,
 				files_paths[i], &game->sprite_textures[type][i].width,
