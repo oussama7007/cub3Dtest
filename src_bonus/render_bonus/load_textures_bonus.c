@@ -6,11 +6,80 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 15:20:18 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/09 15:30:37 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/13 23:13:13 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
+
+void	destroy_all_images(t_game *game)
+{
+	int	i;
+	int	j;
+
+	/* Walls */
+	int z = -1;
+	while (++z < 4)
+	{
+		if (game->textures[z].img_ptr)
+		{
+			mlx_destroy_image(game->mlx.mlx_ptr, game->textures[z].img_ptr);
+			game->textures[z].img_ptr = NULL;
+		}
+	}
+
+	/* Doors */
+	int k = -1;
+	while  ( ++k < 2)
+	{
+		if (game->door_textures[k].img_ptr)
+		{
+			mlx_destroy_image(game->mlx.mlx_ptr, game->door_textures[k].img_ptr);
+			game->door_textures[k].img_ptr = NULL;
+		}
+	}
+
+	/* Sprites */
+	i = -1;
+	while ( i++ < SPRITE_TYPE_COUNT)
+	{
+		j = -1;
+		while (++j < game->sprites_frames_count[i])
+		{
+			if (game->sprite_textures[i][j].img_ptr)
+			{
+				mlx_destroy_image(game->mlx.mlx_ptr,
+					game->sprite_textures[i][j].img_ptr);
+				game->sprite_textures[i][j].img_ptr = NULL;
+			}
+		}
+	}
+
+	/* Screen */
+	if (game->mlx.screen.img_ptr)
+	{
+		mlx_destroy_image(game->mlx.mlx_ptr, game->mlx.screen.img_ptr);
+		game->mlx.screen.img_ptr = NULL;
+	}
+}
+
+void	clean_exit_and_exit(t_game *game, int status)
+{
+	if (game)
+	{
+		destroy_all_images(game);
+
+		if (game->mlx.win_ptr)
+		{
+			mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.win_ptr);
+			game->mlx.win_ptr = NULL;
+		}
+
+		if (game->gc)
+			gc_free_all(game->gc);
+	}
+	exit(status);
+}
 
 static t_img	load_texture(t_game *game, char *file)
 {
@@ -20,15 +89,13 @@ static t_img	load_texture(t_game *game, char *file)
 			file, &tex.width, &tex.height);
 	if (!tex.img_ptr)
 	{
-		gc_free(game);
-		exit(-1);
+		clean_exit_and_exit(game, -1);
 	}
 	tex.img_data_addr = mlx_get_data_addr(tex.img_ptr, &tex.bits_per_pixel,
 			&tex.line_length, &tex.endian);
 	if (!tex.img_data_addr)
 	{
-		gc_free(game);
-		exit(-1);
+		clean_exit_and_exit(game, -1);
 	}
 	return (tex);
 }
@@ -57,8 +124,8 @@ static void	load_item_sprites(t_game *game, int type,
 	{
 		if (my_access(files_paths[i]))
 		{
-			printf("Error occured while opening the file\n");
-			gc_free(game);
+			print_err("Error occured while opening the file\n");
+			clean_exit_and_exit(game, -1);
 			exit(-1);
 		}
 		game->sprite_textures[type][i].img_ptr

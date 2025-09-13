@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 14:26:15 by oait-si-          #+#    #+#             */
-/*   Updated: 2025/09/09 13:12:55 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/13 22:34:50 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,14 @@ static char	**read_map_file_lines(const char *filename, t_gc *gc)
 	return (lines);
 }
 
-int	add_sprite(t_config *config, double x, double y, int type)
+int	add_sprite(t_config *config, double x, double y, int type, t_gc *gc)
 {
 	t_sprite	*new_arr;
 	int			i;
 
-	new_arr = malloc(sizeof(t_sprite) * (config->sprites_count + 1));
-	if (!new_arr)
-		return (print_err("new_arr allocation failed\n"));
+	new_arr = gc_malloc(gc ,sizeof(t_sprite) * (config->sprites_count + 1));
+	// if (!new_arr)
+	// 	return (print_err("new_arr allocation failed\n"));
 	i = -1;
 	while (++i < config->sprites_count)
 		new_arr[i] = config->sprites[i];
@@ -76,23 +76,23 @@ int	add_sprite(t_config *config, double x, double y, int type)
 	new_arr[config->sprites_count].type = type;
 	new_arr[config->sprites_count].active = true;
 	new_arr[config->sprites_count].anim_index = 0;
-	if (config->sprites)
-		free(config->sprites);
+	// if (config->sprites)
+	// 	free(config->sprites);
 	config->sprites = new_arr;
 	config->sprites_count++;
 	return (0);
 }
 
-int	add_door(t_config *config, int x, int y)
+int	add_door(t_config *config, int x, int y, t_gc *gc)
 {
 	t_door	*new_arr;
 	int		i;
 
 	if (is_door_valide(config->map.grid, x, y))
 		return (print_err("Error: door is not surrounded by walls\n"));
-	new_arr = malloc(sizeof(t_door) * (config->doors_count + 1));
-	if (!new_arr)
-		return (print_err("new_arr allocation failed\n"));
+	new_arr = gc_malloc(gc ,sizeof(t_door) * (config->doors_count + 1));
+	// if (!new_arr)
+	// 	return (print_err("new_arr allocation failed\n"));
 	i = -1;
 	while (++i < config->doors_count)
 		new_arr[i] = config->doors[i];
@@ -104,8 +104,8 @@ int	add_door(t_config *config, int x, int y)
 	new_arr[config->doors_count].door_offset = 0.0;
 	new_arr[config->doors_count].state = 0;
 	new_arr[config->doors_count].side_hit = 0;
-	if (config->doors)
-		free(config->doors);
+	// if (config->doors)
+	// 	free(config->doors);
 	config->doors = new_arr;
 	config->doors_count++;
 	return (0);
@@ -131,7 +131,7 @@ int	parse_cub3d_map(t_config *config, t_gc *gc, const char *filename)
 		|| validate_config(config, gc)
 		|| validate_map(config, gc, map_desc_len))
 		return (-1);
-	if (fill_sprites_and_doors_arrays(config))
+	if (fill_sprites_and_doors_arrays(config, gc))
 		return (-1);
 	return (0);
 }

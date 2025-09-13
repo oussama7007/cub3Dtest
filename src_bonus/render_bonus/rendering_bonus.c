@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 15:21:31 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/09 15:15:24 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/13 22:52:15 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ int	rendering(t_game *game)
 	if (!game->mlx.screen.img_data_addr)
 		return (print_err("mlx error: Failed to get image address\n"));
 	game->config.z_buffer = gc_malloc(game->gc, sizeof(double) * WIDTH);
-	if (!game->config.z_buffer)
-		return (print_err("z_buffer allocation failed\n"));
 	load_wall_all_tex(game);
 	load_door_all_text(game);
 	load_all_sprites_tex(game);
