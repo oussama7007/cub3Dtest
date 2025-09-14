@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:01:11 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/09 12:25:40 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/13 22:35:19 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	is_color_integer(char *color, int *rgb_int, t_gc *gc)
 	return (1);
 }
 
-int	fill_sprites_and_doors_arrays(t_config *config)
+int	fill_sprites_and_doors_arrays(t_config *config, t_gc *gc)
 {
 	int	i;
 	int	j;
@@ -63,12 +63,12 @@ int	fill_sprites_and_doors_arrays(t_config *config)
 		{
 			if (config->map.grid[i][j] == '3')
 			{
-				if (add_sprite(config, j, i, ITEM_TYPE))
+				if (add_sprite(config, j, i, ITEM_TYPE, gc))
 					return (-1);
 			}
 			else if (config->map.grid[i][j] == '4')
 			{
-				if (add_door(config, j, i))
+				if (add_door(config, j, i, gc))
 					return (-1);
 			}
 		}

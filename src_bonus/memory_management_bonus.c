@@ -3,28 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   memory_management_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkolani <bkolani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 15:22:09 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/05 15:22:48 by bkolani          ###   ########.fr       */
+/*   Updated: 2025/09/13 22:41:12 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
+
+void	gc_free_all(t_gc *gc)
+{
+	t_gc_node	*tmp;
+
+	if (!gc)
+		return ;
+	while (gc->head)
+	{
+		tmp = gc->head->next;
+		free(gc->head->ptr);
+		free(gc->head);
+		gc->head = tmp;
+	}
+	free(gc);
+}
 
 void	*gc_malloc(t_gc *gc, size_t size)
 {
 	void		*ptr;
 	t_gc_node	*gc_node;
 
+	if (!gc || size == 0)
+	{
+		print_err("Error: invalid GC or size\n");
+		exit(EXIT_FAILURE);
+	}
 	ptr = malloc(size);
 	if (!ptr)
-		return (NULL);
+	{
+		gc_free_all(gc);
+		print_err("Error: memory allocation failed\n");
+		exit(EXIT_FAILURE);
+	}
 	gc_node = malloc(sizeof(t_gc_node));
 	if (!gc_node)
 	{
 		free(ptr);
-		return (NULL);
+		gc_free_all(gc);
+		print_err("Error: GC node allocation failed\n");
+		exit(EXIT_FAILURE);
 	}
 	gc_node->ptr = ptr;
 	gc_node->next = gc->head;
@@ -34,19 +61,8 @@ void	*gc_malloc(t_gc *gc, size_t size)
 
 void	gc_free(t_game *game)
 {
-	t_gc_node	*tmp;
-
-	if (!game->gc)
+	if (!game || !game->gc)
 		return ;
-	free(game->config.sprites);
-	free(game->config.doors);
-	while (game->gc->head)
-	{
-		tmp = game->gc->head->next;
-		free(game->gc->head->ptr);
-		free(game->gc->head);
-		game->gc->head = tmp;
-	}
-	free(game->gc);
+	gc_free_all(game->gc);
 	free(game);
 }

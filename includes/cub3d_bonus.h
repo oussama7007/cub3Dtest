@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:20:36 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/12 16:38:17 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/13 22:40:31 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -329,6 +329,7 @@ void		*gc_malloc(t_gc *gc, size_t size);
 void		gc_free(t_game *game);
 
 // UTILS FUNCTIONS
+void		gc_free_all(t_gc *gc);
 int			print_err(const char *err_msg);
 size_t		ft_strlen(const char *str);
 char		*ft_strchr(const char *str, int c);
@@ -387,13 +388,13 @@ void		set_plane(t_player *player, double x, double y);
 int			get_element_path(const char *line, t_config *config, t_gc *gc);
 int			parse_color(const char *line, t_config *config,
 				char conf_type, t_gc *gc);
-int			fill_sprites_and_doors_arrays(t_config *config);
+int	fill_sprites_and_doors_arrays(t_config *config, t_gc *gc);
 int			handle_config_line_err(t_config *config, t_gc *gc, char *line,
 				int map_started);
 void		set_player_details(t_config *config, char **tmp_map, int i);
 int			handle_config_line(t_config *config, t_gc *gc, char *line);
-int			add_sprite(t_config *config, double x, double y, int type);
-int			add_door(t_config *config, int x, int y);
+int			add_sprite(t_config *config, double x, double y, int type, t_gc *gc);
+int			add_door(t_config *config, int x, int y, t_gc *gc);
 char		*clean_path(const char *line, t_gc *gc);
 
 // RENDER FUNCTIONS
