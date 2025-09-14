@@ -28,30 +28,29 @@ void	gc_free_all(t_gc *gc)
 	free(gc);
 }
 
+static void	err_handler(t_gc *gc, const char *msg, int flag)
+{
+	if (flag)
+		gc_free_all(gc);
+	print_err(msg);
+	exit(EXIT_FAILURE);
+}
+
 void	*gc_malloc(t_gc *gc, size_t size)
 {
 	void		*ptr;
 	t_gc_node	*gc_node;
 
 	if (!gc || size == 0)
-	{
-		print_err("Error: invalid GC or size\n");
-		exit(EXIT_FAILURE);
-	}
+		err_handler(gc, "Error: invalid GC or size\n", 0);
 	ptr = malloc(size);
 	if (!ptr)
-	{
-		gc_free_all(gc);
-		print_err("Error: memory allocation failed\n");
-		exit(EXIT_FAILURE);
-	}
+		err_handler(gc, "Error: memory allocation failed\n", 1);
 	gc_node = malloc(sizeof(t_gc_node));
 	if (!gc_node)
 	{
 		free(ptr);
-		gc_free_all(gc);
-		print_err("Error: GC node allocation failed\n");
-		exit(EXIT_FAILURE);
+		err_handler(gc, "Error: GC node allocation failed\n", 1);
 	}
 	gc_node->ptr = ptr;
 	gc_node->next = gc->head;

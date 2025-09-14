@@ -92,12 +92,18 @@ size_t	find_max_width(t_config *config)
 
 int	check_player_count(char **tmp_map, int *player_count, int i)
 {
-	if (ft_strchr(tmp_map[i], 'N') || ft_strchr(tmp_map[i], 'S')
-		|| ft_strchr(tmp_map[i], 'E') || ft_strchr(tmp_map[i], 'W'))
+	int	j;
+
+	j = -1;
+	while (++j < (int)ft_strlen(tmp_map[i]))
 	{
-		if (*player_count == 1)
-			return (print_err("Map error: single player required!\n"));
-		(*player_count)++;
+		if (tmp_map[i][j] == 'N' || tmp_map[i][j] == 'S'
+			|| tmp_map[i][j] == 'E' || tmp_map[i][j] == 'W')
+		{
+			if (*player_count == 1)
+				return (print_err("Map error: single player required!\n"));
+			(*player_count)++;
+		}
 	}
 	return (0);
 }

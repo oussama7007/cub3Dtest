@@ -63,7 +63,7 @@ int	fill_sprites_and_doors_arrays(t_config *config, t_gc *gc)
 		{
 			if (config->map.grid[i][j] == '3')
 			{
-				if (add_sprite(config, j, i, ITEM_TYPE, gc))
+				if (add_sprite(config, j, i, gc))
 					return (-1);
 			}
 			else if (config->map.grid[i][j] == '4')

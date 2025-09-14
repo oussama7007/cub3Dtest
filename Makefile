@@ -67,7 +67,8 @@ SRCS_BONUS = src_bonus/cub3d_bonus.c utils/error.c utils/ft_strlen.c \
 		src_bonus/render_bonus/rendering_utils_bonus___.c \
 		src_bonus/render_bonus/rendering_utils_bonus____.c \
 		src_bonus/parsing_bonus/parse_elements_utils_bonus_.c \
-		src_bonus/parsing_bonus/parse_elements_utils_bonus__.c
+		src_bonus/parsing_bonus/parse_elements_utils_bonus__.c \
+		src_bonus/render_bonus/destroy_images_bonus.c 
 
 OBJS = $(SRCS:.c=.o)
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)

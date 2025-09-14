@@ -325,8 +325,10 @@ typedef struct s_bfs_args
 	char		**tmp_map;
 }	t_bfs_args;
 
+// MEMORY UTILS FUNCTIONS
 void		*gc_malloc(t_gc *gc, size_t size);
 void		gc_free(t_game *game);
+void		clean_exit_and_exit(t_game *game, int status);
 
 // UTILS FUNCTIONS
 void		gc_free_all(t_gc *gc);
@@ -388,12 +390,12 @@ void		set_plane(t_player *player, double x, double y);
 int			get_element_path(const char *line, t_config *config, t_gc *gc);
 int			parse_color(const char *line, t_config *config,
 				char conf_type, t_gc *gc);
-int	fill_sprites_and_doors_arrays(t_config *config, t_gc *gc);
+int			fill_sprites_and_doors_arrays(t_config *config, t_gc *gc);
 int			handle_config_line_err(t_config *config, t_gc *gc, char *line,
 				int map_started);
 void		set_player_details(t_config *config, char **tmp_map, int i);
 int			handle_config_line(t_config *config, t_gc *gc, char *line);
-int			add_sprite(t_config *config, double x, double y, int type, t_gc *gc);
+int			add_sprite(t_config *config, double x, double y, t_gc *gc);
 int			add_door(t_config *config, int x, int y, t_gc *gc);
 char		*clean_path(const char *line, t_gc *gc);
 
