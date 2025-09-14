@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 13:25:20 by oait-si-          #+#    #+#             */
-/*   Updated: 2025/09/12 16:45:11 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/14 15:30:17 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ int	process_line(t_parse_ctx *context)
 	}
 	else if (is_map_desc_line(context->lines[i]))
 	{
-		if (!context->config->last_map.path_flag
-			|| !context->config->last_map.color_flag)
+		if (!context->config->last_map.we_path_flag || !context->config->last_map.so_path_flag || !context->config->last_map.f_color_flag || !context->config->last_map.c_color_flag || !context->config->last_map.no_path_flag || !context->config->last_map.ea_path_flag )
 			return (print_err("Error: the map content must be the last!\n"));
 		handle_vals_to_check_for_empty_line(&context->state->i,
 			&context->state->map_started,
