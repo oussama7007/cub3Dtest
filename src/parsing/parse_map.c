@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:44:50 by oait-si-          #+#    #+#             */
-/*   Updated: 2025/09/16 16:05:34 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/16 19:17:08 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,24 +60,15 @@ static char	**read_map_file_lines(const char *filename, t_gc *gc)
 	return (lines);
 }
 
-int is_hidden(const char *path)
-{
-    const char *base;
-	
-	base = path + ft_strlen(path);
-    while (base > path && *(base - 1) != '/')
-        base--;
-    return (base[0] == '.');
-}
-
 int	parse_cub3d_map(t_config *config, t_gc *gc, const char *filename)
 {
-	char	**lines;
-	size_t	map_desc_len; 
+	char		**lines;
+	size_t		map_desc_len;
 
 	map_desc_len = 0;
-	if (ft_strncmp(filename + (ft_strlen(filename) - 4), ".cub", 4) || is_hidden(filename))
-		return (print_err("Error: invalid file; need fileneme.cub extension file\n"));
+	if (ft_strncmp(filename + (ft_strlen(filename) - 4), ".cub", 4)
+		|| is_hidden(filename))
+		return (print_err("Error: invalid file name need \'filename.cub\'\n"));
 	lines = read_map_file_lines(filename, gc);
 	if (!lines)
 		return (1);
@@ -85,8 +76,8 @@ int	parse_cub3d_map(t_config *config, t_gc *gc, const char *filename)
 		|| validate_config(config, gc)
 		|| validate_map(config, gc, map_desc_len))
 		return (-1);
-	config->map.grid
-	[(int)config->player.pos.y][(int)config->player.pos.x] = '0';
+	config->map.grid[(int)config->player.pos.y]
+	[(int)config->player.pos.x] = '0';
 	return (0);
 }
 

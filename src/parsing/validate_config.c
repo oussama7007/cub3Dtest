@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:48:40 by oait-si-          #+#    #+#             */
-/*   Updated: 2025/09/16 16:21:39 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/16 19:03:58 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ int	validate_config(t_config *config, t_gc *gc)
 	if (!config->no || !config->so || !config->ea || !config->we)
 		return (print_err("Map error: element path missing\n"));
 	if (my_access(config->no) || my_access(config->so)
-		|| my_access(config->ea) || my_access(config->we) || is_hidden(config->no) || is_hidden(config->so) || is_hidden(config->ea) || is_hidden(config->we))
-	{
+		|| my_access(config->ea) || my_access(config->we)
+		|| is_hidden(config->no) || is_hidden(config->so)
+		|| is_hidden(config->ea) || is_hidden(config->we))
 		return (print_err("Map error: Invalid path !\n"));
-	}
 	return (0);
 }
 

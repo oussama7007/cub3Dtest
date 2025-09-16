@@ -6,12 +6,11 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 11:33:04 by oait-si-          #+#    #+#             */
-/*   Updated: 2025/09/14 15:17:03 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/16 19:18:10 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
 
 int	main(int ac, const char **av)
 {
