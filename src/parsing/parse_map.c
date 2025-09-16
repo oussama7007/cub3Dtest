@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:44:50 by oait-si-          #+#    #+#             */
-/*   Updated: 2025/09/14 16:08:43 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/16 16:05:34 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,23 @@ static char	**read_map_file_lines(const char *filename, t_gc *gc)
 	return (lines);
 }
 
+int is_hidden(const char *path)
+{
+    const char *base;
+	
+	base = path + ft_strlen(path);
+    while (base > path && *(base - 1) != '/')
+        base--;
+    return (base[0] == '.');
+}
+
 int	parse_cub3d_map(t_config *config, t_gc *gc, const char *filename)
 {
 	char	**lines;
-	size_t	map_desc_len;
+	size_t	map_desc_len; 
 
 	map_desc_len = 0;
-	if (ft_strlen(filename) <= 4 || ft_strncmp(filename + (ft_strlen(filename) - 4), ".cub", 4))
+	if (ft_strncmp(filename + (ft_strlen(filename) - 4), ".cub", 4) || is_hidden(filename))
 		return (print_err("Error: invalid file; need fileneme.cub extension file\n"));
 	lines = read_map_file_lines(filename, gc);
 	if (!lines)

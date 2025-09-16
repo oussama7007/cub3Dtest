@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:46:30 by oait-si-          #+#    #+#             */
-/*   Updated: 2025/09/14 15:27:05 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/16 16:10:21 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	handle_config_line(t_config *config, t_gc *gc, char *line)
 {
 	if (is_path_line(line))
 	{
-		
 		if (get_element_path(line, config, gc))
 			return (-1);
 	}

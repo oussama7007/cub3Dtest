@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:38:04 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/14 15:30:24 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/16 16:19:53 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,6 +244,7 @@ int		parse_color(const char *line,
 			t_config *config, char conf_type, t_gc *gc);
 
 // PARSING UTILS FUNCTIONS
+int		is_hidden(const char *path);
 int		parse_color_helper(char **rgb, int *rgb_int, t_gc *gc, size_t len);
 int		is_color_line(const char *line);
 int		is_color_integer(char *color, int *rgb_int, t_gc *gc);

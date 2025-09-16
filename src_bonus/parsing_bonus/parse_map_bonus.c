@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 14:26:15 by oait-si-          #+#    #+#             */
-/*   Updated: 2025/09/14 16:02:48 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/16 15:29:31 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,10 @@ int	parse_cub3d_map(t_config *config, t_gc *gc, const char *filename)
 	config->sprites_count = 0;
 	config->doors = NULL;
 	config->doors_count = 0;
-	int count = ft_strlen(filename);
-	printf("%d\n", count);
-	if (ft_strncmp(filename + (ft_strlen(filename) - 4), ".cub", 4))
+	
+	if (ft_strncmp(filename + (ft_strlen(filename) - 4), ".cub", 4) || is_hidden(filename + (ft_strlen(filename) - 4)))
 		return (print_err("File error: invalid "
-				"file; need .cub extension file\n"));
+				"file; need filename.cub extension file\n"));
 	lines = read_map_file_lines(filename, gc);
 	if (!lines)
 		return (print_err("Map error: Failed when getting map lines!\n"));
