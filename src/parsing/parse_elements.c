@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:41:03 by oait-si-          #+#    #+#             */
-/*   Updated: 2025/09/14 15:28:22 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/16 18:54:23 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,17 @@ int	get_element_path(const char *line, t_config *config, t_gc *gc)
 	}
 	else if (!ft_strncmp(line, "SO ", 3) && config->so == NULL)
 	{
-		config->no = clean_path(line + 3, gc);
+		config->so = clean_path(line + 3, gc);
 		config->last_map.so_path_flag = 1;
 	}
 	else if (!ft_strncmp(line, "EA ", 3) && config->ea == NULL)
 	{
-		config->no = clean_path(line + 3, gc);
+		config->ea = clean_path(line + 3, gc);
 		config->last_map.ea_path_flag = 1;
 	}
 	else if (!ft_strncmp(line, "WE ", 3) && config->we == NULL)
 	{
-		config->no = clean_path(line + 3, gc);
+		config->we = clean_path(line + 3, gc);
 		config->last_map.we_path_flag = 1;
 	}
 	else
