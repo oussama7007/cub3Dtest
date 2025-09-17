@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 15:32:53 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/12 16:35:51 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/17 17:03:38 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,24 @@ int	handle_config_line(t_config *config, t_gc *gc, char *line)
 {
 	if (is_path_line(line))
 	{
-		config->last_map.path_flag = 1;
 		if (get_element_path(line, config, gc))
 			return (-1);
 	}
 	else if (is_color_line(line))
 	{
-		config->last_map.color_flag = 1;
 		if ((!ft_strncmp(line, "F ", 2) && config->floor_found)
 			|| (!ft_strncmp(line, "C ", 2) && config->ceil_found))
 			return (print_err("Error: Color configuration line duplicated\n"));
 		if (!ft_strncmp(line, "F ", 2))
+		{
 			config->floor_found = 1;
+			config->last_map.f_color_flag = 1;
+		}
 		else if (!ft_strncmp(line, "C ", 2))
+		{
 			config->ceil_found = 1;
+			config->last_map.c_color_flag = 1;
+		}
 		if (parse_color(line + 2, config, line[0], gc))
 			return (-1);
 	}

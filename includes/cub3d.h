@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:38:04 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/17 15:36:38 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/17 17:22:20 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,6 +210,7 @@ void	*gc_malloc(t_gc *gc, size_t size);
 void	gc_free(t_game *game);
 
 // UTILS FUNCTIONS
+int		is_last(t_parse_ctx *context);
 int		print_err(const char *err_msg);
 size_t	ft_strlen(const char *str);
 char	*ft_strchr(const char *str, int c);

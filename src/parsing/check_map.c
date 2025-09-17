@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 17:40:55 by oait-si-          #+#    #+#             */
-/*   Updated: 2025/09/17 16:23:15 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/17 17:02:50 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,9 @@ int	is_map_config_line(const char *line, t_gc *gc)
 {
 	char *trimed;
 	
-	
 	if(is_empty_line(line))
 		return 0;
 	trimed = clean_path(line, gc);
-
 	if (ft_strncmp(trimed, "NO ", 3) != 0
 		&& ft_strncmp(trimed, "SO ", 3) != 0
 		&& ft_strncmp(trimed, "EA ", 3) != 0

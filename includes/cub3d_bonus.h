@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:20:36 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/13 22:40:31 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/17 17:22:33 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,12 @@ typedef struct s_point
 
 typedef struct s_is_last
 {
-	int	color_flag;
-	int	path_flag;
+	int	c_color_flag;
+	int f_color_flag;
+	int	no_path_flag;
+	int so_path_flag;
+	int we_path_flag;
+	int ea_path_flag;
 }	t_is_last;
 
 typedef struct s_line
@@ -350,12 +354,14 @@ void		ft_bzero(void *s, size_t len);
 void		*ft_memset(void *b, int c, size_t len);
 
 // PARSING UTILS FUNCTIONS
+int			is_last(t_parse_ctx *context);
 int			is_door_valide(char **grid, int x, int y);
+int			is_hidden(const char *path);
 int			parse_color_helper(char **rgb, int *rgb_int, t_gc *gc, size_t len);
 int			is_color_line(const char *line);
 int			is_color_integer(char *color, int *rgb_int, t_gc *gc);
 int			is_path_line(const char *line);
-int			is_map_config_line(const char *line);
+int			is_map_config_line(const char *line, t_gc *gc);
 int			is_map_desc_line(const char *line);
 int			is_empty_line(const char *line);
 int			d_fill(t_config *config, char **tmp_map, int x, int y);

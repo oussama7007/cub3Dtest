@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 15:25:38 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/12 15:37:11 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/17 17:18:54 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,25 @@ static int	set_config(t_config *config, t_gc *gc, size_t map_len)
 int	get_element_path(const char *line, t_config *config, t_gc *gc)
 {
 	if (!ft_strncmp(line, "NO ", 3) && config->no == NULL)
+	{
 		config->no = clean_path(line + 3, gc);
+		config->last_map.no_path_flag = 1;
+	}
 	else if (!ft_strncmp(line, "SO ", 3) && config->so == NULL)
+	{
 		config->so = clean_path(line + 3, gc);
+		config->last_map.so_path_flag = 1;
+	}
 	else if (!ft_strncmp(line, "EA ", 3) && config->ea == NULL)
+	{
 		config->ea = clean_path(line + 3, gc);
+		config->last_map.ea_path_flag = 1;
+	}
 	else if (!ft_strncmp(line, "WE ", 3) && config->we == NULL)
+	{
 		config->we = clean_path(line + 3, gc);
+		config->last_map.we_path_flag = 1;
+	}
 	else
 		return (print_err("Error: Element configuration line duplicated!\n"));
 	return (0);

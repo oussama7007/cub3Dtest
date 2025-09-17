@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkolani <bkolani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 15:19:02 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/05 15:19:04 by bkolani          ###   ########.fr       */
+/*   Updated: 2025/09/17 16:37:52 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,14 @@ int	init_mlx(t_mlx *mlx_)
 	if (!mlx_->win_ptr)
 		return (print_err("mlx error: Failed to create a new window\n"));
 	return (0);
+}
+
+int	is_hidden(const char *path)
+{
+	const char	*base;
+
+	base = path + ft_strlen(path);
+	while (base > path && *(base - 1) != '/')
+		base--;
+	return (base[0] == '.');
 }

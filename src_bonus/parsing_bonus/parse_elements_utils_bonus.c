@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 15:29:43 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/09 12:17:16 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/17 17:21:30 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,14 @@ void	handle_vals_to_check_for_empty_line(int *i, int *map_started,
 	if (*first_map_line == -1)
 		*first_map_line = *i;
 	*last_map_line = *i;
+}
+
+int	is_last(t_parse_ctx *context)
+{
+	return (!context->config->last_map.we_path_flag
+		|| !context->config->last_map.so_path_flag
+		|| !context->config->last_map.f_color_flag
+		|| !context->config->last_map.c_color_flag
+		|| !context->config->last_map.no_path_flag
+		|| !context->config->last_map.ea_path_flag);
 }
