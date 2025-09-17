@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 17:40:55 by oait-si-          #+#    #+#             */
-/*   Updated: 2025/09/05 13:19:26 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/17 16:23:15 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,21 @@ int	is_empty_line(const char *line)
 	return (1);
 }
 
-int	is_map_config_line(const char *line)
+int	is_map_config_line(const char *line, t_gc *gc)
 {
-	if (ft_strncmp(line, "NO ", 3) != 0
-		&& ft_strncmp(line, "SO ", 3) != 0
-		&& ft_strncmp(line, "EA ", 3) != 0
-		&& ft_strncmp(line, "WE ", 3) != 0
-		&& ft_strncmp(line, "F ", 2) != 0
-		&& ft_strncmp(line, "C ", 2) != 0)
+	char *trimed;
+	
+	
+	if(is_empty_line(line))
+		return 0;
+	trimed = clean_path(line, gc);
+
+	if (ft_strncmp(trimed, "NO ", 3) != 0
+		&& ft_strncmp(trimed, "SO ", 3) != 0
+		&& ft_strncmp(trimed, "EA ", 3) != 0
+		&& ft_strncmp(trimed, "WE ", 3) != 0
+		&& ft_strncmp(trimed, "F ", 2) != 0
+		&& ft_strncmp(trimed, "C ", 2) != 0)
 		return (0);
 	return (1);
 }

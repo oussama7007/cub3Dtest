@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:38:04 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/16 16:19:53 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/17 15:36:38 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,7 +249,7 @@ int		parse_color_helper(char **rgb, int *rgb_int, t_gc *gc, size_t len);
 int		is_color_line(const char *line);
 int		is_color_integer(char *color, int *rgb_int, t_gc *gc);
 int		is_path_line(const char *line);
-int		is_map_config_line(const char *line);
+int		is_map_config_line(const char *line, t_gc *gc);
 int		is_map_desc_line(const char *line);
 int		is_empty_line(const char *line);
 int		flood_fill_space_bfs(t_bfs_args *args, int x, int y);
