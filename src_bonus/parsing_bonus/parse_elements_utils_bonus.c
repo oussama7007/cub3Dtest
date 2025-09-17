@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 15:29:43 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/17 17:21:30 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/17 21:18:32 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	check_rgb_string(char *tmp)
 			return (1);
 		j++;
 	}
+	if(!num_started && !space_after_num)
+			return 1;
 	return (0);
 }
 

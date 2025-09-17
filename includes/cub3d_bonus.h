@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:20:36 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/17 17:22:33 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/17 21:52:59 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@
 // # include "X11/X.h"
 # include "fcntl.h"
 # include "stdlib.h"
-# include "string.h"
 # include "stdbool.h"
-# include "stdint.h"
 # include "math.h"
 # include "sys/time.h"
 
@@ -354,6 +352,7 @@ void		ft_bzero(void *s, size_t len);
 void		*ft_memset(void *b, int c, size_t len);
 
 // PARSING UTILS FUNCTIONS
+int			count_comma(const char *line);
 int			is_last(t_parse_ctx *context);
 int			is_door_valide(char **grid, int x, int y);
 int			is_hidden(const char *path);
@@ -372,6 +371,7 @@ t_door		*get_door_in_front_helper(t_config *config, int idx);
 char		*ft_strtrim(char const *s1, char const *set, t_gc *gc);
 
 // PARSING FUNCTIONS
+int			is_valid(char *str);
 int			validate_config(t_config *config, t_gc *gc);
 int			validate_map(t_config *config, t_gc *gc, size_t map_len);
 void		fetch_map_desc_lines(t_config *config, char **lines, t_gc *gc);

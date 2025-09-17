@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:01:11 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/13 22:35:19 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/17 21:48:28 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,10 @@ int	fill_sprites_and_doors_arrays(t_config *config, t_gc *gc)
 	}
 	return (0);
 }
+int 	is_valid(char *str)
+{
+	return(ft_strncmp(str + (ft_strlen(str) - 4), ".xpm", 4));	
+}
 
 int	validate_config(t_config *config, t_gc *gc)
 {
@@ -82,9 +86,11 @@ int	validate_config(t_config *config, t_gc *gc)
 	if (!config->no || !config->so || !config->ea || !config->we)
 		return (print_err("Map error: element path missing\n"));
 	if (my_access(config->no) || my_access(config->so)
-		|| my_access(config->ea) || my_access(config->we))
-	{
-		return (print_err("Map error: Invalid path; file not found!\n"));
-	}
+		|| my_access(config->ea) || my_access(config->we)
+		|| is_hidden(config->no) || is_hidden(config->so)
+		|| is_hidden(config->ea) || is_hidden(config->we)
+		|| is_valid(config->ea) || is_valid(config->no)
+		|| is_valid(config->so) || is_valid(config->we))
+		return (print_err("Map error: Invalid path !\n"));
 	return (0);
 }

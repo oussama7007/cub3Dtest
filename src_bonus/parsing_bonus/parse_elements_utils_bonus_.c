@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 16:55:51 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/12 16:38:29 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/17 21:31:17 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	parse_color(const char *line, t_config *config,
 	int		rgb_int[3];
 	size_t	len;
 
+	if(count_comma(line))
+		return print_err("Error: only 3 Numbers for colors\n");
 	rgb = ft_split(gc, line, ',');
 	len = 0;
 	if (check_for_an_empty_space_in(rgb))
@@ -64,8 +66,7 @@ int	parse_color(const char *line, t_config *config,
 	if (rgb_int[0] < 0 || rgb_int[0] > 255
 		|| rgb_int[1] < 0 || rgb_int[1] > 255
 		|| rgb_int[2] < 0 || rgb_int[2] > 255)
-		return (print_err("Error: Each color "
-				"need to be between 0 and 255\n"));
+		return (print_err("Error: Each color need to be between 0 and 255\n"));
 	if (conf_type == 'F')
 		config->floor_color = (rgb_int[0] << 16)
 			| (rgb_int[1] << 8) | rgb_int[2];

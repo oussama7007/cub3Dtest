@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:38:04 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/17 17:22:20 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/17 21:51:29 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@
 // # include "X11/X.h"
 # include "fcntl.h"
 # include "stdlib.h"
-# include "string.h"
-# include "stdbool.h"
-# include "stdint.h"
 # include "math.h"
 
 # define BUFFER_SIZE 42
@@ -210,6 +207,7 @@ void	*gc_malloc(t_gc *gc, size_t size);
 void	gc_free(t_game *game);
 
 // UTILS FUNCTIONS
+int		count_comma(const char *line);
 int		is_last(t_parse_ctx *context);
 int		print_err(const char *err_msg);
 size_t	ft_strlen(const char *str);
@@ -262,6 +260,7 @@ char	*clean_path(const char *line, t_gc *gc);
 int		process_line(t_parse_ctx *context);
 char	*ft_strtrim(char const *s1, char const *set, t_gc *gc);
 // PARSING FUNCTIONS
+int 	is_valid(char *str);
 int		validate_config(t_config *config, t_gc *gc);
 int		validate_map(t_config *config, t_gc *gc, size_t map_len);
 void	fetch_map_desc_lines(char **grid, char **lines, t_gc *gc);

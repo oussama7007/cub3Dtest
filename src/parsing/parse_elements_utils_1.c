@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:09:00 by oait-si-          #+#    #+#             */
-/*   Updated: 2025/09/10 17:11:08 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/17 21:17:46 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static int	check_rgb_string(char *tmp)
 			return (1);
 		j++;
 	}
+	if(!num_started && !space_after_num)
+			return 1;
 	return (0);
 }
 
@@ -63,7 +65,7 @@ int	check_for_an_empty_space_in(char **rgb)
 	{
 		tmp = rgb[i];
 		if (check_rgb_string(tmp))
-			return (print_err("Error: invalid Number in the color\n"));
+			return (print_err("Error: invalid Number in the color\n"));			
 	}
 	return (0);
 }
