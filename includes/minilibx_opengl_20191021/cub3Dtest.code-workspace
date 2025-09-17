@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "../cub3Dtest"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"__config": "c",
+			"ios": "c",
+			"iosfwd": "c",
+			"locale": "c",
+			"optional": "c",
+			"string": "c",
+			"utility": "c",
+			"cub3d_bonus.h": "c"
+		}
+	}
+}

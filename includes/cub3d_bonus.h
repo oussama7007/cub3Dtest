@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:20:36 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/17 21:59:58 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/17 23:01:13 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "unistd.h"
 # include "stdio.h"
-# include "../../minilibx_opengl_20191021/mlx.h"
+# include "minilibx_opengl_20191021/mlx.h"
 # include "fcntl.h"
 # include "stdlib.h"
 # include "stdbool.h"
