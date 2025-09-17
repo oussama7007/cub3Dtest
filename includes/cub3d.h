@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:38:04 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/17 21:51:29 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/17 22:02:20 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,22 @@
 # include "unistd.h"
 # include "stdio.h"
 # include "../../minilibx_opengl_20191021/mlx.h"
-// # include "X11/X.h"
 # include "fcntl.h"
 # include "stdlib.h"
 # include "math.h"
 
 # define BUFFER_SIZE 42
-
-// Pour le rendu
 # define HEIGHT 720
 # define WIDTH 1280
 
 typedef struct s_is_last
 {
 	int	c_color_flag;
-	int f_color_flag;
+	int	f_color_flag;
 	int	no_path_flag;
-	int so_path_flag;
-	int we_path_flag;
-	int ea_path_flag;
+	int	so_path_flag;
+	int	we_path_flag;
+	int	ea_path_flag;
 }	t_is_last;
 
 typedef enum e_texture
@@ -53,7 +50,6 @@ typedef struct s_iter_state
 	int	l_map_line;
 }	t_iter_state;
 
-// STRUCT FOR A VERTICAL LINE WHEN A RAY TOUCH A WALL
 typedef struct s_draw
 {
 	int	draw_start;
@@ -149,9 +145,6 @@ typedef struct s_ray
 	int			texture_id;
 }	t_ray;
 
-// FOR KEYS POUR MEMORISER LES TOUCHES PRESSES 
-// CAR mlx NE CAPTE QU"UN SEUL CLIC 
-// DONC POUR AVOIR UNE CLIQUE CONTINU
 typedef struct s_keys
 {
 	int	w;
@@ -162,8 +155,6 @@ typedef struct s_keys
 	int	right;
 }	t_keys;
 
-// MEMORY MANAGEMENT FUNCTIONS AND GARBAGE COLLECTOR
-// TYPE DEFINITION
 typedef struct s_gc_node
 {
 	void				*ptr;
@@ -259,8 +250,9 @@ int		handle_config_line(t_config *config, t_gc *gc, char *line);
 char	*clean_path(const char *line, t_gc *gc);
 int		process_line(t_parse_ctx *context);
 char	*ft_strtrim(char const *s1, char const *set, t_gc *gc);
+
 // PARSING FUNCTIONS
-int 	is_valid(char *str);
+int		is_valid(char *str);
 int		validate_config(t_config *config, t_gc *gc);
 int		validate_map(t_config *config, t_gc *gc, size_t map_len);
 void	fetch_map_desc_lines(char **grid, char **lines, t_gc *gc);
@@ -275,7 +267,6 @@ int		check_middle_rows(t_map map, int i, t_gc *gc);
 // RENDER FUNCTIONS
 int		rendering(t_game *game);
 int		ft_init_mlx(t_mlx *mlx);
-// int		render_frame(t_game *game);
 
 // RENDER UTILS FUNCTIONS 
 int		draw_background(t_game *game);
@@ -285,13 +276,11 @@ int		initialize_texture(t_ray *ray, t_img *texture, t_config *config);
 
 // RAYCASTING FUNCTIONS
 int		raycasting(t_game *game);
-// int 	render_frame(t_game *game);
 void	perform_dda(t_ray *ray, t_config *config);
 void	init_dda(t_ray *ray, t_config *config);
 void	compute_projection(t_ray *ray);
 int		draw_column(t_ray *ray, t_game *game, int x);
 int		draw_col_checker(t_game *game, t_img *texture, t_ray *ray);
-// void    cast_single_ray(t_game *game, int x);
 
 // PLAYER MOVEMENTS
 int		update_player(t_game *game);

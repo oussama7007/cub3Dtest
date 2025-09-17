@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:01:11 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/17 21:48:28 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/17 22:20:03 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,6 @@ int	fill_sprites_and_doors_arrays(t_config *config, t_gc *gc)
 		}
 	}
 	return (0);
-}
-int 	is_valid(char *str)
-{
-	return(ft_strncmp(str + (ft_strlen(str) - 4), ".xpm", 4));	
 }
 
 int	validate_config(t_config *config, t_gc *gc)

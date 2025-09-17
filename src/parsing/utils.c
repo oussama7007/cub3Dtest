@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 13:25:20 by oait-si-          #+#    #+#             */
-/*   Updated: 2025/09/17 16:33:41 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/17 22:09:45 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ int	is_last(t_parse_ctx *context)
 
 int	process_line(t_parse_ctx *context)
 {
-	int	i;
-	char *trimed;
+	int		i;
+	char	*trimed;
 
 	i = context->state->i;
 	if (is_map_config_line(context->lines[i], context->gc))
 	{
-		trimed = clean_path(context->lines[i], context->gc );
+		trimed = clean_path(context->lines[i], context->gc);
 		if (handle_config_line_err(context->config, context->gc,
 				trimed, context->state->map_started))
 			return (-1);

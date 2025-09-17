@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 16:55:51 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/17 21:31:17 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/17 22:18:08 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int	parse_color(const char *line, t_config *config,
 	int		rgb_int[3];
 	size_t	len;
 
-	if(count_comma(line))
-		return print_err("Error: only 3 Numbers for colors\n");
+	if (count_comma(line))
+		return (print_err("Error: only 3 Numbers for colors\n"));
 	rgb = ft_split(gc, line, ',');
 	len = 0;
 	if (check_for_an_empty_space_in(rgb))

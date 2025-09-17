@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:48:40 by oait-si-          #+#    #+#             */
-/*   Updated: 2025/09/17 21:45:47 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/17 22:09:58 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,7 @@ void	set_player_orientation(t_player *player, char *pos_line)
 	}
 	set_direction(player, dir);
 }
-int 	is_valid(char *str)
-{
-	return(ft_strncmp(str + (ft_strlen(str) - 4), ".xpm", 4));	
-}
+
 int	validate_config(t_config *config, t_gc *gc)
 {
 	(void)gc;

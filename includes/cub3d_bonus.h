@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:20:36 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/17 21:52:59 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/17 21:59:58 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "unistd.h"
 # include "stdio.h"
 # include "../../minilibx_opengl_20191021/mlx.h"
-// # include "X11/X.h"
 # include "fcntl.h"
 # include "stdlib.h"
 # include "stdbool.h"
@@ -24,10 +23,8 @@
 # include "sys/time.h"
 
 # define BUFFER_SIZE 42
-
 # define MINIMAP_RADIUS 100
 # define MINIMAP_SCALE 10
-
 # define WALL_TYPE 0
 # define DOOR_TYPE 1
 # define ITEM_TYPE 2
@@ -36,17 +33,13 @@
 # define ITEM_FRAMES 12
 # define DOOR_FRAMES 2
 # define MAX_FRAMES_PER_SPRITE 30
-
 # define CELL_SIZE 10
 # define ITEM_CELL_SIZE 5
 # define PLAYER_CELL_SIZE 5
 # define DOOR_CELL_SIZE 5
 # define START_PIXEL_X 1
 # define START_PIXEL_Y 1
-
-// # define FOV (M_PI / 3)
 # define FOV 1.047197551
-
 # define HEIGHT 720
 # define WIDTH 1280
 
@@ -67,11 +60,11 @@ typedef struct s_point
 typedef struct s_is_last
 {
 	int	c_color_flag;
-	int f_color_flag;
+	int	f_color_flag;
 	int	no_path_flag;
-	int so_path_flag;
-	int we_path_flag;
-	int ea_path_flag;
+	int	so_path_flag;
+	int	we_path_flag;
+	int	ea_path_flag;
 }	t_is_last;
 
 typedef struct s_line
@@ -87,24 +80,6 @@ typedef struct s_line
 	int	err;
 	int	color;
 }	t_line;
-
-// typedef struct s_fov
-// {
-// 	int		x;
-// 	int		y;
-// 	double	dx;
-// 	double	dy;
-// 	int		px;
-// 	int		py;
-// 	double	player_angle;
-// 	int		intersection;
-// 	double	start_angle;
-// 	double	end_angle;
-// 	double	step;
-// 	int		map_x;
-// 	int		map_y;
-// 	double	range;
-// }	t_fov;
 
 typedef struct s_sprite
 {
@@ -300,7 +275,6 @@ typedef struct s_game
 	int			last_x;
 	int			g_mouse_lock;
 	t_door		*door_in_front_of_player;
-	// t_fov		mini_map_fov;
 }	t_game;
 
 typedef struct s_queue
@@ -408,7 +382,6 @@ char		*clean_path(const char *line, t_gc *gc);
 // RENDER FUNCTIONS
 int			rendering(t_game *game);
 int			init_mlx(t_mlx *mlx_);
-// int		render_frame(t_game *game);
 
 // RENDER UTILS FUNCTIONS 
 void		open_door(t_game *game);
@@ -422,23 +395,7 @@ void		update_sprites_animation(t_game *game);
 void		update_all_doors(t_config *config);
 void		render_all_sprites(t_game *game);
 t_sprite	*detect_item_(t_config *config, int x, int y);
-// void	init_fov(t_game *game, t_fov **fov);
-// int			draw_map_wall_cell(t_img *screen,
-// int map_x, int map_y, int color);
 int			is_item_active(t_config *config, int x, int y);
-// int			draw_map_item_cell(t_game *game, int map_x,
-// int map_y, int color);
-// int			draw_map_door_cell(t_game *game, int map_x,
-// int map_y, int color);
-// int			draw_player_on_the_map(t_game *game, int color);
-// int			draw_opened_door_side_y(t_game *game, int color,
-// 				int pixel_x, int pixel_y);
-// int			draw_opened_door_side_x(t_game *game, int color,
-// 				int pixel_x, int pixel_y);
-// int			draw_closed_door_side_y(t_game *game, int color,
-// 				int pixel_x, int pixel_y);
-// int			draw_closed_door_side_x(t_game *game, int color,
-// 				int pixel_x, int pixel_y);
 int			project_and_render_sprite(t_game *game, t_sprite *sprite);
 int			draw_square(t_img *img, int x, int y, int color);
 int			draw_filled_circle(t_img *img, int cx, int cy, int r);
@@ -451,12 +408,10 @@ int			process_line(t_parse_ctx *context);
 
 // RAYCASTING FUNCTIONS
 int			raycasting(t_game *game);
-// int 	render_frame(t_game *game);
 void		perform_dda(t_ray *ray, t_config *config);
 void		init_dda(t_ray *ray, t_config *config);
 void		compute_projection(t_ray *ray);
 int			draw_column(t_ray *ray, t_game *game, int x);
-// void    cast_single_ray(t_game *game, int x);
 int			dda_hit_door(t_config *config, t_ray *ray);
 void		get_x_side_door_dir_text(t_ray *ray, t_door *door, int *dir_tex);
 void		get_y_side_door_dir_text(t_ray *ray, t_door *door, int *dir_tex);

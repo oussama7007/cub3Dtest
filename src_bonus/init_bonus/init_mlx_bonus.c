@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 15:19:02 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/17 16:37:52 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/17 22:20:40 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,9 @@ int	is_hidden(const char *path)
 	while (base > path && *(base - 1) != '/')
 		base--;
 	return (base[0] == '.');
+}
+
+int	is_valid(char *str)
+{
+	return (ft_strncmp(str + (ft_strlen(str) - 4), ".xpm", 4));
 }

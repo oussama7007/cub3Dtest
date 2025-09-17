@@ -6,7 +6,7 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 17:03:39 by bkolani           #+#    #+#             */
-/*   Updated: 2025/09/17 16:56:28 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/09/17 22:21:35 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,6 @@ int	check_middle_rows(t_map map, int i, t_gc *gc)
 		return (print_err("Map error: Invalid row!\n"));
 	return (0);
 }
-
-// int	check_middle_rows(t_map map, int i)
-// {
-// 	int	last_char_idx;
-
-// 	last_char_idx = ft_strlen(map.grid[i]) - 1;
-// 	if ((map.grid[i][0] != '1' && !ft_isspace(map.grid[i][0]))
-// 		|| (map.grid[i][last_char_idx] != '1'
-// 		&& !ft_isspace(map.grid[i][last_char_idx])))
-// 		return (print_err("Map error: invalid walls!\n"));
-// 	return (0);
-// }
 
 void	init_vars(int *front, int *back)
 {
@@ -73,13 +61,13 @@ int	is_door_valide(char **grid, int x, int y)
 
 int	process_line(t_parse_ctx *context)
 {
-	int	i;
-	char *trimed;
+	int		i;
+	char	*trimed;
 
 	i = context->state->i;
 	if (is_map_config_line(context->lines[i], context->gc))
 	{
-		trimed = clean_path(context->lines[i], context->gc );
+		trimed = clean_path(context->lines[i], context->gc);
 		if (handle_config_line_err(context->config, context->gc,
 				trimed, context->state->map_started))
 			return (-1);
